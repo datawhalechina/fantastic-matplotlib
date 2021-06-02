@@ -55,7 +55,7 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
     本回介绍了常用的两种绘图布局方法，让使用者可以自由地在画布中进行布局
 
-* [第四回：文字图例尽眉目](https://nbviewer.jupyter.org/github/datawhalechina/fantastic-matplotlib/blob/783ea720ba34593f8786a3e501a6b9e512c3f2dc/%E7%AC%AC%E5%9B%9B%E5%9B%9E%EF%BC%9A%E6%96%87%E5%AD%97%E5%9B%BE%E4%BE%8B%E5%B0%BD%E7%9C%89%E7%9B%AE.ipynb)
+* [第四回：文字图例尽眉目](https://nbviewer.jupyter.org/github/datawhalechina/fantastic-matplotlib/blob/main/%E7%AC%AC%E5%9B%9B%E5%9B%9E%EF%BC%9A%E6%96%87%E5%AD%97%E5%9B%BE%E4%BE%8B%E5%B0%BD%E7%9C%89%E7%9B%AE.ipynb)
 
     	>为了让你的画流传更久远，快来学习下如何在画布上题字吧
 
