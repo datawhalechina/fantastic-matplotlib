@@ -39,7 +39,7 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
 * [第一回：Matplotlib初相识](https://nbviewer.jupyter.org/github/datawhalechina/fantastic-matplotlib/blob/main/%E7%AC%AC%E4%B8%80%E5%9B%9E%EF%BC%9AMatplotlib%E5%88%9D%E7%9B%B8%E8%AF%86.ipynb)
 
-    	>和matplotlib的初次邂逅，赶紧拿出画布，画笔，一段奇幻的旅途即将开启
+    	> 和matplotlib的初次邂逅，赶紧拿出画布，画笔，一段奇幻的旅途即将开启
 
     本回作为引入，介绍了matplotlib可视化绘图包的特点，以及如何用最简单的几行代码画出一幅可视化图表。
 
@@ -98,8 +98,6 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
 第五章：杨剑砺
 
-第六章：杨剑砺，杨煜，居凤霞，耿远昊，李运佳
-
 ## 关注我们
 
 > "Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。"
@@ -108,3 +106,8 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
 
 
+## LICENSE
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
+
+本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
