@@ -102,9 +102,7 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
 > "Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。"
 
-[![img](https://raw.githubusercontent.com/datawhalechina/dive-into-cv-pytorch/master/markdown_imgs/datawhale_qrcode.jpeg)](https://raw.githubusercontent.com/datawhalechina/dive-into-cv-pytorch/master/markdown_imgs/datawhale_qrcode.jpeg)
-
-
+<div align=center><img src="https://img-blog.csdnimg.cn/20210607220347359.png" width = "250" height = "270" alt="Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。"></div>
 
 ## LICENSE
 
