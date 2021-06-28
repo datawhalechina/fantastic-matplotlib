@@ -612,3 +612,8 @@ plt.legend([p3, p4], ['label', 'label1'], loc='lower right', scatterpoints=1)
 # 为了保留之前的l1这个legend，所以必须要通过plt.gca()获得当前的axes，然后将l1作为单独的artist
 plt.gca().add_artist(l1);
 
+
+# ## 参考资料
+# 
+# [1.matplotlib官网文字使用指南](https://matplotlib.org/stable/tutorials/text/text_intro.html#sphx-glr-tutorials-text-text-intro-py
+# )

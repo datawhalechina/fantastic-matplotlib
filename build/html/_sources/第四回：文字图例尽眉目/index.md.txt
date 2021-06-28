@@ -662,4 +662,7 @@ plt.gca().add_artist(l1);
 
 
 
+## 参考资料
 
+[1.matplotlib官网文字使用指南](https://matplotlib.org/stable/tutorials/text/text_intro.html#sphx-glr-tutorials-text-text-intro-py
+)
