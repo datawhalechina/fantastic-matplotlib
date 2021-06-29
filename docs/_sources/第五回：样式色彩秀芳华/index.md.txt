@@ -75,7 +75,7 @@ print(plt.style.available)
 
 
 ```{code-cell} ipython3
-plt.style.use('https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle')
+plt.style.use('file/presentation.mplstyle')
 plt.plot([1,2,3,4],[2,3,4,5]);
 ```
 
@@ -89,7 +89,7 @@ plt.plot([1,2,3,4],[2,3,4,5]);
 
 
 ```{code-cell} ipython3
-plt.style.use(['dark_background', 'https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle'])
+plt.style.use(['dark_background', 'file/presentation.mplstyle'])
 plt.plot([1,2,3,4],[2,3,4,5]);
 ```
 
@@ -280,6 +280,6 @@ plt.scatter(x,y,c=x,cmap='RdPu');
 
 
 ## 参考资料
-[1.matplotlib官网样式使用指南](https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams)
+[1.matplotlib官网样式使用指南](https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams)  
 [2.matplotlib官网色彩使用指南](https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py)
 

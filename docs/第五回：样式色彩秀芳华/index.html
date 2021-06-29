@@ -336,152 +336,25 @@ ytick.labelsize : 16</p>
 <p>引用自定义stylesheet后观察图表变化。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;file/presentation.mplstyle&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">gaierror</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1345</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1346</span>                 <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1347</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1253</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1254</span> 
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1298</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1299</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1300</span> 
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1247</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1248</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1249</span> 
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1007</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1008</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1009</span> 
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">947</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">948</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">949</span>             <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1414</span> 
-<span class="ne">-&gt; </span><span class="mi">1415</span>             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1416</span> 
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\http\client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">918</span>         <span class="sd">&quot;&quot;&quot;Connect to the host and port specified in __init__.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">919</span>         <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_connection</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">920</span>             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_address</span><span class="p">)</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\socket.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
-<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">822</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\socket.py</span> in <span class="ni">getaddrinfo</span><span class="nt">(host, port, family, type, proto, flags)</span>
-<span class="g g-Whitespace">    </span><span class="mi">952</span>     <span class="n">addrlist</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="ne">--&gt; </span><span class="mi">953</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">_socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">family</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">954</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="ne">gaierror</span>: [Errno 11004] getaddrinfo failed
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">c:\users\skywater\pycharmprojects\personal\demo\lib\site-packages\matplotlib\style\core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">115</span>                 <span class="n">rc</span> <span class="o">=</span> <span class="n">rc_params_from_file</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">use_default_template</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span>                 <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
-
-<span class="nn">c:\users\skywater\pycharmprojects\personal\demo\lib\site-packages\matplotlib\__init__.py</span> in <span class="ni">rc_params_from_file</span><span class="nt">(fname, fail_on_error, use_default_template)</span>
-<span class="g g-Whitespace">    </span><span class="mi">797</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">798</span><span class="s2">     config_from_file = _rc_params_in_file(fname, fail_on_error=fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">799</span><span class="s2"> </span>
-
-<span class="nn">c:\users\skywater\pycharmprojects\personal\demo\lib\site-packages\matplotlib\__init__.py</span> in <span class="ni">_rc_params_in_file</span><span class="nt">(fname, transform, fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span><span class="s2">     rc_temp = </span><span class="si">{}</span><span class="s2"></span>
-<span class="ne">--&gt; </span><span class="mi">727</span><span class="s2">     with _open_file_or_url(fname) as fd:</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span><span class="s2">         try:</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\contextlib.py</span> in <span class="ni">__enter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">             return next(self.gen)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2">         except StopIteration:</span>
-
-<span class="nn">c:\users\skywater\pycharmprojects\personal\demo\lib\site-packages\matplotlib\__init__.py</span> in <span class="ni">_open_file_or_url</span><span class="nt">(fname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">697</span><span class="s2">             )</span>
-<span class="ne">--&gt; </span><span class="mi">698</span><span class="s2">         with urllib.request.urlopen(fname, context=ssl_ctx) as f:</span>
-<span class="g g-Whitespace">    </span><span class="mi">699</span><span class="s2">             yield (line.decode(&#39;utf-8&#39;) for line in f)</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span><span class="s2">         opener = _opener</span>
-<span class="ne">--&gt; </span><span class="mi">214</span><span class="s2">     return opener.open(url, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span><span class="s2"> </span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">516</span><span class="s2">         sys.audit(&#39;urllib.Request&#39;, req.full_url, req.data, req.headers, req.get_method())</span>
-<span class="ne">--&gt; </span><span class="mi">517</span><span class="s2">         response = self._open(req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span><span class="s2"> </span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">_open</span><span class="nt">(self, req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span><span class="s2">         protocol = req.type</span>
-<span class="ne">--&gt; </span><span class="mi">534</span><span class="s2">         result = self._call_chain(self.handle_open, protocol, protocol +</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">                                   &#39;_open&#39;, req)</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span><span class="s2">             func = getattr(handler, meth_name)</span>
-<span class="ne">--&gt; </span><span class="mi">494</span><span class="s2">             result = func(*args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">495</span><span class="s2">             if result is not None:</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">https_open</span><span class="nt">(self, req)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1388</span><span class="s2">         def https_open(self, req):</span>
-<span class="ne">-&gt; </span><span class="mi">1389</span><span class="s2">             return self.do_open(http.client.HTTPSConnection, req,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1390</span><span class="s2">                 context=self._context, check_hostname=self._check_hostname)</span>
-
-<span class="nn">~\AppData\Local\Programs\Python\Python39\lib\urllib\request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span><span class="s2">             except OSError as err: # timeout error</span>
-<span class="ne">-&gt; </span><span class="mi">1349</span><span class="s2">                 raise URLError(err)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span><span class="s2">             r = h.getresponse()</span>
-
-<span class="ne">URLError</span>: &lt;urlopen error [Errno 11004] getaddrinfo failed&gt;
-
-<span class="s2">The above exception was the direct cause of the following exception:</span>
-
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="s2">&lt;ipython-input-5-8ce8ec49641e&gt; in &lt;module&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span><span class="s2"> plt.style.use(&#39;https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle&#39;)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="s2"> plt.plot([1,2,3,4],[2,3,4,5]);</span>
-
-<span class="nn">c:\users\skywater\pycharmprojects\personal\demo\lib\site-packages\matplotlib\style\core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">                 _apply_style(rc)</span>
-<span class="g g-Whitespace">    </span><span class="mi">117</span><span class="s2">             except IOError as err:</span>
-<span class="ne">--&gt; </span><span class="mi">118</span><span class="s2">                 raise IOError(</span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">                     &quot;</span><span class="si">{!r}</span><span class="s2"> not found in the style library and input is not a &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">120</span><span class="s2">                     &quot;valid URL or path; see `style.available` for list of &quot;</span>
-
-<span class="ne">OSError</span>: &#39;https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle&#39; not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
-</pre></div>
-</div>
+<img alt="../_images/index_7_02.png" src="../_images/index_7_02.png" />
 </div>
 </div>
 <p>值得特别注意的是，matplotlib支持混合样式的引用，只需在引用时输入一个样式列表，若是几个样式中涉及到同一个参数，右边的样式表会覆盖左边的值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;dark_background&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/datawhalechina/fantastic-matplotlib/main/file/presentation.mplstyle&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;dark_background&#39;</span><span class="p">,</span> <span class="s1">&#39;file/presentation.mplstyle&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_9_01.png" src="../_images/index_9_01.png" />
 </div>
 </div>
 </div>
@@ -496,6 +369,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_11_01.png" src="../_images/index_11_01.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -504,6 +380,9 @@ ytick.labelsize : 16</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_12_02.png" src="../_images/index_12_02.png" />
 </div>
 </div>
 <p>另外matplotlib也还提供了了一种更便捷的修改样式方式，可以一次性修改多个样式。</p>
@@ -514,6 +393,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_14_02.png" src="../_images/index_14_02.png" />
+</div>
 </div>
 </div>
 <div class="section" id="matplotlibrc">
@@ -523,6 +405,11 @@ ytick.labelsize : 16</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查找matplotlibrc文件的路径</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;c:\\users\\skywater\\pycharmprojects\\personal\\demo\\lib\\site-packages\\matplotlib\\mpl-data\\matplotlibrc&#39;
 </pre></div>
 </div>
 </div>
@@ -558,6 +445,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_19_01.png" src="../_images/index_19_01.png" />
+</div>
 </div>
 </div>
 <div class="section" id="hex-rgb-rgba">
@@ -569,6 +459,9 @@ ytick.labelsize : 16</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#0f0f0f80&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_21_02.png" src="../_images/index_21_02.png" />
 </div>
 </div>
 <p>RGB颜色和HEX颜色之间是可以一一对应的，以下网址提供了两种色彩表示方法的转换工具。<br />
@@ -583,6 +476,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_23_01.png" src="../_images/index_23_01.png" />
+</div>
 </div>
 </div>
 <div class="section" id="id3">
@@ -594,6 +490,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_25_01.png" src="../_images/index_25_01.png" />
+</div>
 </div>
 </div>
 <div class="section" id="id4">
@@ -604,6 +503,9 @@ ytick.labelsize : 16</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;tan&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_27_01.png" src="../_images/index_27_01.png" />
 </div>
 </div>
 <p><img alt="" src="https://matplotlib.org/3.1.0/_images/sphx_glr_named_colors_002.png" />
@@ -628,6 +530,9 @@ ytick.labelsize : 16</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_29_0.png" src="../_images/index_29_0.png" />
+</div>
 </div>
 <p>在以下官网页面可以查询上述五种colormap的字符串表示和颜色图的对应关系<br />
 <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html">https://matplotlib.org/stable/tutorials/colors/colormaps.html</a></p>
@@ -635,7 +540,7 @@ ytick.labelsize : 16</p>
 </div>
 <div class="section" id="id5">
 <h2>参考资料<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams">1.matplotlib官网样式使用指南</a>
+<p><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams">1.matplotlib官网样式使用指南</a><br />
 <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py">2.matplotlib官网色彩使用指南</a></p>
 </div>
 </div>
