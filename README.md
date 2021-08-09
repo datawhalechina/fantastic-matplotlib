@@ -31,8 +31,8 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 ## 使用说明
 
 - 使用前请将matplotlib升级到最新版本V3.3.3(2020年12月)，否则可能会出现报错！
-- 本教程独立网站已上线:[https://datawhalechina.github.io/fantastic-matplotlib/](https://datawhalechina.github.io/fantastic-matplotlib/)
-- 若是在github中加载ipynb文件失败，可以选择 1）下载后在本地阅读 2）使用nbviewer渲染后阅读，可直接戳下方目录
+- 本教程独立网站已上线：[https://datawhalechina.github.io/fantastic-matplotlib/](https://datawhalechina.github.io/fantastic-matplotlib/)
+- 本教程pdf版本已在仓库更新：[https://github.com/datawhalechina/fantastic-matplotlib/blob/main/fantastic-matplotlib.pdf](https://github.com/datawhalechina/fantastic-matplotlib/blob/main/fantastic-matplotlib.pdf)
 - 使用时若发现任何问题，或是你对项目内容有好的建议，欢迎留言交流
 
 
