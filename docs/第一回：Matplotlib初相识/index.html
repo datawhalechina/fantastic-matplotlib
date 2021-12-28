@@ -208,6 +208,16 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
+   五、通用绘图模板
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   思考题
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
    参考资料
   </a>
  </li>
@@ -237,6 +247,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -334,7 +345,46 @@
 </div>
 </div>
 <div class="section" id="id4">
-<h2>参考资料<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>五、通用绘图模板<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>由于matplotlib的知识点非常繁杂，在实际使用过程中也不可能将全部API都记住，很多时候都是边用边查。因此这里提供一个通用的绘图基础模板，任何复杂的图表几乎都可以基于这个模板骨架填充内容而成。初学者刚开始学习时只需要牢记这一模板就足以应对大部分简单图表的绘制，在学习过程中可以将这个模板模块化，了解每个模块在做什么，在绘制复杂图表时如何修改，填充对应的模块。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># step1 准备数据</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># step2 设置绘图样式，这一模块的扩展参考第五章进一步学习，这一步不是必须的，样式也可以在绘制图像是进行设置</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+
+<span class="c1"># step3 定义布局， 这一模块的扩展参考第三章进一步学习</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  
+
+<span class="c1"># step4 绘制图像， 这一模块的扩展参考第二章进一步学习</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>  
+
+<span class="c1"># step5 添加标签，文字和图例，这一模块的扩展参考第四章进一步学习</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x label&#39;</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y label&#39;</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simple Plot&quot;</span><span class="p">)</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span> <span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_10_0.png" src="../_images/index_10_0.png" />
+</div>
+</div>
+<p>​</p>
+</div>
+<div class="section" id="id5">
+<h2>思考题<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>请思考两种绘图模式的优缺点和各自适合的使用场景</p></li>
+<li><p>在第五节绘图模板中我们是以OO模式作为例子展示的，请思考并写一个pyplot绘图模式的简单模板</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>参考资料<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/usage.html">1.matplotlib官网用户指南</a></p>
 </div>
 </div>

@@ -27,6 +27,7 @@ Matplotlib的图像是画在figure（如windows，jupyter窗体）上的，每�
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy as np
 ```
 
@@ -132,10 +133,40 @@ plt.show()
 
 
 
+## 五、通用绘图模板
+由于matplotlib的知识点非常繁杂，在实际使用过程中也不可能将全部API都记住，很多时候都是边用边查。因此这里提供一个通用的绘图基础模板，任何复杂的图表几乎都可以基于这个模板骨架填充内容而成。初学者刚开始学习时只需要牢记这一模板就足以应对大部分简单图表的绘制，在学习过程中可以将这个模板模块化，了解每个模块在做什么，在绘制复杂图表时如何修改，填充对应的模块。
 
 
+```{code-cell} ipython3
+# step1 准备数据
+x = np.linspace(0, 2, 100)
+y = x**2
+
+# step2 设置绘图样式，这一模块的扩展参考第五章进一步学习，这一步不是必须的，样式也可以在绘制图像是进行设置
+mpl.rc('lines', linewidth=4, linestyle='-.')
+
+# step3 定义布局， 这一模块的扩展参考第三章进一步学习
+fig, ax = plt.subplots()  
+
+# step4 绘制图像， 这一模块的扩展参考第二章进一步学习
+ax.plot(x, y, label='linear')  
+
+# step5 添加标签，文字和图例，这一模块的扩展参考第四章进一步学习
+ax.set_xlabel('x label') 
+ax.set_ylabel('y label') 
+ax.set_title("Simple Plot")  
+ax.legend() ;
+```
+
+
+
+
+​   
+
+## 思考题
+- 请思考两种绘图模式的优缺点和各自适合的使用场景
+- 在第五节绘图模板中我们是以OO模式作为例子展示的，请思考并写一个pyplot绘图模式的简单模板
 
 ## 参考资料
 
 [1.matplotlib官网用户指南](https://matplotlib.org/stable/tutorials/introductory/usage.html)
-
