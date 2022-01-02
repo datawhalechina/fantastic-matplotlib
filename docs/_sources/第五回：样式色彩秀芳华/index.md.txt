@@ -10,7 +10,7 @@ kernelspec:
 
 
 第五回详细介绍matplotlib中样式和颜色的使用，绘图样式和颜色是丰富可视化图表的重要手段，因此熟练掌握本章可以让可视化图表变得更美观，突出重点和凸显艺术性。  
-关于绘图样式，常见的有4种方法，分别是修改预定义样式，自定义样式，rcparams和matplotlibrc文件。  
+关于绘图样式，常见的有3种方法，分别是修改预定义样式，自定义样式和rcparams。  
 关于颜色使用，本章介绍了常见的5种表示单色颜色的基本方法，以及colormap多色显示的方法。
 
 ## 一、matplotlib的绘图样式（style）
@@ -135,24 +135,6 @@ plt.plot([1,2,3,4],[2,3,4,5]);
 
 
 
-
-
-
-
-### 4.修改matplotlibrc文件
-
-由于matplotlib是使用matplotlibrc文件来控制样式的，也就是上一节提到的rc setting，所以我们还可以通过修改matplotlibrc文件的方式改变样式。
-
-
-```{code-cell} ipython3
-# 查找matplotlibrc文件的路径
-mpl.matplotlib_fname()
-```
-
-找到路径后，就可以直接编辑样式文件了，打开后看到的文件格式大致是这样的，文件中列举了所有的样式参数，找到想要修改的参数，比如lines.linewidth: 8，并将前面的注释符号去掉，此时再绘图发现样式以及生效了。
-
-![](https://img-blog.csdnimg.cn/20201124005855980.PNG)
-
 ## 二、matplotlib的色彩设置（color）
 
 在可视化中，如何选择合适的颜色和搭配组合也是需要仔细考虑的，色彩选择要能够反映出可视化图像的主旨。  
@@ -265,21 +247,9 @@ plt.scatter(x,y,c=x,cmap='RdPu');
 ```
 
 
-
-
-
-
-
-
-
-
-
 在以下官网页面可以查询上述五种colormap的字符串表示和颜色图的对应关系    
 [https://matplotlib.org/stable/tutorials/colors/colormaps.html](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
 
 
-
-## 参考资料
-[1.matplotlib官网样式使用指南](https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams)  
-[2.matplotlib官网色彩使用指南](https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py)
-
+## 思考题
+- 学习如何自定义colormap，并将其应用到任意一个数据集中，绘制一幅图像，注意colormap的类型要和数据集的特性相匹配，并做简单解释

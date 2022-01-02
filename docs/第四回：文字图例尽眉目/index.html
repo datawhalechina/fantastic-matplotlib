@@ -192,38 +192,33 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#api">
+     1.文本API示例
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#text">
-     1.text
+     2.text - 子图上的文本
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#titleset-title">
-     2.title和set_title
+    <a class="reference internal nav-link" href="#xlabelylabel-x-y">
+     3.xlabel和ylabel - 子图的x，y轴标签
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#figtexttext">
-     3.figtext和text
+    <a class="reference internal nav-link" href="#titlesuptitle">
+     4.title和suptitle - 子图和画布的标题
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#suptitle">
-     4.suptitle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#xlabelylabel">
-     5.xlabel和ylabel
+    <a class="reference internal nav-link" href="#annotate">
+     5.annotate - 子图的注解
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
      6.字体的属性设置
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     7.数学表达式
     </a>
    </li>
   </ul>
@@ -234,7 +229,7 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id3">
      1.简单模式
     </a>
    </li>
@@ -263,8 +258,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   参考资料
+  <a class="reference internal nav-link" href="#id4">
+   思考题
   </a>
  </li>
 </ul>
@@ -280,9 +275,22 @@
                 
   <div class="section" id="id1">
 <h1>第四回：文字图例尽眉目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="figureaxes">
 <h2>一、Figure和Axes上的文本<a class="headerlink" href="#figureaxes" title="永久链接至标题">¶</a></h2>
 <p>Matplotlib具有广泛的文本支持，包括对数学表达式的支持、对栅格和矢量输出的TrueType支持、具有任意旋转的换行分隔文本以及Unicode支持。</p>
+<div class="section" id="api">
+<h3>1.文本API示例<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h3>
 <p>下面的命令是介绍了通过pyplot API和objected-oriented API分别创建文本的方式。</p>
 <table class="colwidths-auto table">
 <thead>
@@ -292,42 +300,104 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>text</p></td>
-<td><p>text</p></td>
-<td><p>在 Axes的任意位置添加text</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>在子图axes的任意位置添加文本</p></td>
 </tr>
-<tr class="row-odd"><td><p>title</p></td>
-<td><p>set_title</p></td>
-<td><p>在 Axes添加title</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">annotate</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">annotate</span></code></p></td>
+<td><p>在子图axes的任意位置添加注解，包含指向性的箭头</p></td>
 </tr>
-<tr class="row-even"><td><p>figtext</p></td>
-<td><p>text</p></td>
-<td><p>在Figure的任意位置添加text.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xlabel</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_xlabel</span></code></p></td>
+<td><p>为子图axes添加x轴标签</p></td>
 </tr>
-<tr class="row-odd"><td><p>suptitle</p></td>
-<td><p>suptitle</p></td>
-<td><p>在 Figure添加title</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ylabel</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_ylabel</span></code></p></td>
+<td><p>为子图axes添加y轴标签</p></td>
 </tr>
-<tr class="row-even"><td><p>xlabel</p></td>
-<td><p>set_xlabel</p></td>
-<td><p>在Axes的x-axis添加label</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">title</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_title</span></code></p></td>
+<td><p>为子图axes添加标题</p></td>
 </tr>
-<tr class="row-odd"><td><p>ylabel</p></td>
-<td><p>set_ylabel</p></td>
-<td><p>在Axes的y-axis添加label</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">figtext</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>在画布figure的任意位置添加文本</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">suptitle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">suptitle</span></code></p></td>
+<td><p>为画布figure添加标题</p></td>
 </tr>
 </tbody>
 </table>
+<p>通过一个综合例子，以OO模式展示这些API是如何控制一个图像中各部分的文本，在之后的章节我们再详细分析这些api的使用技巧</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+
+
+<span class="c1"># 分别为figure和ax设置标题，注意两者的位置是不同的</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;bold figure suptitle&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;axes title&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设置x和y轴标签</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ylabel&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设置x和y轴显示范围均为0到10</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># 在子图上添加文本</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;boxed italics text in data coords&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+
+<span class="c1"># 在画布上添加文本，一般在子图上添加文本是更常见的操作，这种方法很少用</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="s1">&#39;This is text for figure&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="c1"># 添加注解</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;annotate&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_3_03.png" src="../_images/index_3_03.png" />
+</div>
+</div>
+<p>​</p>
+</div>
 <div class="section" id="text">
-<h3>1.text<a class="headerlink" href="#text" title="永久链接至标题">¶</a></h3>
-<p>pyplot API：matplotlib.pyplot.text(x, y, s, fontdict=None, **kwargs)<br />
-OO API:Axes.text(self, x, y, s, fontdict=None, **kwargs)<br />
-<strong>参数</strong>：此方法接受以下描述的参数：<br />
-s:此参数是要添加的文本。<br />
-xy:此参数是放置文本的点(x，y)。<br />
-fontdict:此参数是一个可选参数，并且是一个覆盖默认文本属性的字典。如果fontdict为None，则由rcParams确定默认值。<br />
-<strong>返回值</strong>：此方法返回作为创建的文本实例的文本。</p>
-<p>fontdict主要参数具体介绍，更多参数请参考<a class="reference external" href="https://matplotlib.org/api/text_api.html?highlight=text#matplotlib.text.Text">官网说明</a>：</p>
+<h3>2.text - 子图上的文本<a class="headerlink" href="#text" title="永久链接至标题">¶</a></h3>
+<p>text的调用方式为<code class="docutils literal notranslate"><span class="pre">Axes.text(x,</span> <span class="pre">y,</span> <span class="pre">s,</span> <span class="pre">fontdict=None,</span> <span class="pre">**kwargs)</span> </code><br />
+其中<code class="docutils literal notranslate"><span class="pre">x</span></code>,<code class="docutils literal notranslate"><span class="pre">y</span></code>为文本出现的位置，默认状态下即为当前坐标系下的坐标值，<br />
+<code class="docutils literal notranslate"><span class="pre">s</span></code>为文本的内容，<br />
+<code class="docutils literal notranslate"><span class="pre">fontdict</span></code>是可选参数，用于覆盖默认的文本属性，<br />
+<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>为关键字参数，也可以用于传入文本样式参数</p>
+<p>重点解释下fontdict和**kwargs参数，这两种方式都可以用于调整呈现的文本样式，最终效果是一样的，不仅text方法，其他文本方法如set_xlabel,set_title等同样适用这两种方式修改样式。通过一个例子演示这两种方法是如何使用的。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 使用关键字参数修改文本样式</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;modify by **kwargs&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">});</span>
+
+<span class="c1"># 使用fontdict参数修改文本样式</span>
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bbox&#39;</span><span class="p">:{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="s1">&#39;style&#39;</span><span class="p">:</span><span class="s1">&#39;italic&#39;</span><span class="p">}</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;modify by fontdict&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_5_02.png" src="../_images/index_5_02.png" />
+</div>
+</div>
+<p>​</p>
+<p>​</p>
+<p>matplotlib中所有支持的样式参数请参考<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.text.html#matplotlib.axes.Axes.text">官网文档说明</a>，大多数时候需要用到的时候再查询即可。</p>
+<p>下表列举了一些常用的参数供参考。</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
@@ -335,247 +405,137 @@ fontdict:此参数是一个可选参数，并且是一个覆盖默认文本属�
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>alpha</p></td>
-<td class="text-align:left"><p>float or None   该参数指透明度，越接近0越透明，越接近1越不透明</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td class="text-align:left"><p>float or None   透明度，越接近0越透明，越接近1越不透明</p></td>
 </tr>
-<tr class="row-odd"><td><p>backgroundcolor</p></td>
-<td class="text-align:left"><p>color</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">backgroundcolor</span></code></p></td>
+<td class="text-align:left"><p>color  文本的背景颜色</p></td>
 </tr>
-<tr class="row-even"><td><p>bbox</p></td>
-<td class="text-align:left"><p>dict with properties for patches.FancyBboxPatch 这个是用来设置text周围的box外框</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bbox</span></code></p></td>
+<td class="text-align:left"><p>dict with properties for patches.FancyBboxPatch 用来设置text周围的box外框</p></td>
 </tr>
-<tr class="row-odd"><td><p>color or c</p></td>
-<td class="text-align:left"><p>color 指的是字体的颜色</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">color</span></code> or c</p></td>
+<td class="text-align:left"><p>color 字体的颜色</p></td>
 </tr>
-<tr class="row-even"><td><p>fontfamily or family</p></td>
-<td class="text-align:left"><p>{FONTNAME, 'serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'} 该参数指的是字体的类型</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fontfamily</span></code> or family</p></td>
+<td class="text-align:left"><p>{FONTNAME, 'serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'} 字体的类型</p></td>
 </tr>
-<tr class="row-odd"><td><p>fontproperties or font or font_properties</p></td>
-<td class="text-align:left"><p>font_manager.FontProperties or str or pathlib.Path</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fontsize</span></code> or size</p></td>
+<td class="text-align:left"><p>float or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'} 字体大小</p></td>
 </tr>
-<tr class="row-even"><td><p>fontsize or size</p></td>
-<td class="text-align:left"><p>float or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'} 该参数指字体大小</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fontstyle</span></code> or style</p></td>
+<td class="text-align:left"><p>{'normal', 'italic', 'oblique'} 字体的样式是否倾斜等</p></td>
 </tr>
-<tr class="row-odd"><td><p>fontstretch or stretch</p></td>
-<td class="text-align:left"><p>{a numeric value in range 0-1000, 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'normal', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded'} 该参数是指从字体中选择正常、压缩或扩展的字体</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fontweight</span></code> or weight</p></td>
+<td class="text-align:left"><p>{a numeric value in range 0-1000, 'ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black'} 文本粗细</p></td>
 </tr>
-<tr class="row-even"><td><p>fontstyle or style</p></td>
-<td class="text-align:left"><p>{'normal', 'italic', 'oblique'} 该参数是指字体的样式是否倾斜等</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">horizontalalignment</span></code> or ha</p></td>
+<td class="text-align:left"><p>{'center', 'right', 'left'}  选择文本左对齐右对齐还是居中对齐</p></td>
 </tr>
-<tr class="row-odd"><td><p>fontweight or weight</p></td>
-<td class="text-align:left"><p>{a numeric value in range 0-1000, 'ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black'}</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linespacing</span></code></p></td>
+<td class="text-align:left"><p>float (multiple of font size)   文本间距</p></td>
 </tr>
-<tr class="row-even"><td><p>horizontalalignment or ha</p></td>
-<td class="text-align:left"><p>{'center', 'right', 'left'}  该参数是指选择文本左对齐右对齐还是居中对齐</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rotation</span></code></p></td>
+<td class="text-align:left"><p>float or {'vertical', 'horizontal'} 指text逆时针旋转的角度，“horizontal”等于0，“vertical”等于90</p></td>
 </tr>
-<tr class="row-odd"><td><p>label</p></td>
-<td class="text-align:left"><p>object</p></td>
-</tr>
-<tr class="row-even"><td><p>linespacing</p></td>
-<td class="text-align:left"><p>float (multiple of font size)</p></td>
-</tr>
-<tr class="row-odd"><td><p>position</p></td>
-<td class="text-align:left"><p>(float, float)</p></td>
-</tr>
-<tr class="row-even"><td><p>rotation</p></td>
-<td class="text-align:left"><p>float or {'vertical', 'horizontal'} 该参数是指text逆时针旋转的角度，“horizontal”等于0，“vertical”等于90。我们可以根据自己设定来选择合适角度</p></td>
-</tr>
-<tr class="row-odd"><td><p>verticalalignment or va</p></td>
-<td class="text-align:left"><p>{'center', 'top', 'bottom', 'baseline', 'center_baseline'}</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">verticalalignment</span></code> or va</p></td>
+<td class="text-align:left"><p>{'center', 'top', 'bottom', 'baseline', 'center_baseline'}  文本在垂直角度的对齐方式</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="xlabelylabel-x-y">
+<h3>3.xlabel和ylabel - 子图的x，y轴标签<a class="headerlink" href="#xlabelylabel-x-y" title="永久链接至标题">¶</a></h3>
+<p>xlabel的调用方式为<code class="docutils literal notranslate"><span class="pre">Axes.set_xlabel(xlabel,</span> <span class="pre">fontdict=None,</span> <span class="pre">labelpad=None,</span> <span class="pre">*,</span> <span class="pre">loc=None,</span> <span class="pre">**kwargs)</span></code><br />
+ylabel方式类似，这里不重复写出。<br />
+其中<code class="docutils literal notranslate"><span class="pre">xlabel</span></code>即为标签内容,<br />
+<code class="docutils literal notranslate"><span class="pre">fontdict</span></code>和<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>用来修改样式，上一小节已介绍,<br />
+<code class="docutils literal notranslate"><span class="pre">labelpad</span></code>为标签和坐标轴的距离，默认为4，<br />
+<code class="docutils literal notranslate"><span class="pre">loc</span></code>为标签位置，可选的值为'left', 'center', 'right'之一，默认为居中</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">FontProperties</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#fontdict学习的案例</span>
-<span class="c1">#学习的过程中请尝试更换不同的fontdict字典的内容，以便于更好的掌握</span>
-<span class="c1">#---------设置字体样式，分别是字体，颜色，宽度，大小</span>
-<span class="n">font1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;SimSun&#39;</span><span class="p">,</span><span class="c1">#华文楷体</span>
-         <span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.7</span><span class="p">,</span><span class="c1">#透明度</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span>  <span class="s1">&#39;purple&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-        <span class="p">}</span>
-<span class="n">font2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span>  <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-        <span class="p">}</span>
-<span class="n">font3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span>  <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-        <span class="p">}</span>
-<span class="n">font4</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;Calibri&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span>  <span class="s1">&#39;navy&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-        <span class="p">}</span>
-<span class="c1">#-----------四种不同字体显示风格-----</span>
- 
-<span class="c1">#-------建立函数----------</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-<span class="c1">#-------绘制图像，添加标注----------</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;震荡曲线&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font1</span><span class="p">)</span>
-<span class="c1">#------添加文本在指定的坐标处------------</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\cos(2 \pi x) \exp(-x/3)$&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font2</span><span class="p">)</span>
-<span class="c1">#---------设置坐标标签</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Y=time (s)&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;X=voltage(mv)&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font4</span><span class="p">)</span>
- 
-<span class="c1"># 调整图像边距</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 观察labelpad和loc参数的使用效果</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># loc参数仅能提供粗略的位置调整，如果想要更精确的设置标签的位置，可以使用position参数+horizontalalignment参数来定位</span>
+<span class="c1"># position由一个元组过程，第一个元素0.2表示x轴标签在x轴的位置，第二个元素对于xlabel其实是无意义的，随便填一个数都可以</span>
+<span class="c1"># horizontalalignment=&#39;left&#39;表示左对齐，这样设置后x轴标签就能精确定位在x=0.2的位置处</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_2_02.png" src="../_images/index_2_02.png" />
+<img alt="../_images/index_7_03.png" src="../_images/index_7_03.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
-<div class="section" id="titleset-title">
-<h3>2.title和set_title<a class="headerlink" href="#titleset-title" title="永久链接至标题">¶</a></h3>
-<p>pyplot API：matplotlib.pyplot.title(label, fontdict=None, loc=None, pad=None, *, y=None, **kwargs)<br />
-OO API:Axes.set_title(self, label, fontdict=None, loc=None, pad=None, *, y=None, **kwargs)<br />
-该命令是用来设置axes的标题。<br />
-<strong>参数</strong>：此方法接受以下描述的参数:<br />
-label：str，此参数是要添加的文本<br />
-fontdict：dict，此参数是控制title文本的外观，默认fontdict如下：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titlesize&#39;</span><span class="p">],</span>
- <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span> <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titleweight&#39;</span><span class="p">],</span>
- <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titlecolor&#39;</span><span class="p">],</span>
- <span class="s1">&#39;verticalalignment&#39;</span><span class="p">:</span> <span class="s1">&#39;baseline&#39;</span><span class="p">,</span>
- <span class="s1">&#39;horizontalalignment&#39;</span><span class="p">:</span> <span class="n">loc</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>loc：str，{'center', 'left', 'right'}默认为center<br />
-pad：float,该参数是指标题偏离图表顶部的距离，默认为6。<br />
-y：float，该参数是title所在axes垂向的位置。默认值为1，即title位于axes的顶部。<br />
-kwargs：该参数是指可以设置的一些奇特文本的属性。<br />
-<strong>返回值</strong>：此方法返回作为创建的title实例的文本。</p>
-</div>
-<div class="section" id="figtexttext">
-<h3>3.figtext和text<a class="headerlink" href="#figtexttext" title="永久链接至标题">¶</a></h3>
-<p>pyplot API：matplotlib.pyplot.figtext(x, y, s, fontdict=None, **kwargs)<br />
-OO API:text(self, x, y, s, fontdict=None,**kwargs)<br />
-<strong>参数</strong>：此方法接受以下描述的参数:<br />
-x,y：float，此参数是指在figure中放置文本的位置。一般取值是在[0,1]范围内。使用transform关键字可以更改坐标系。<br />
-s:str,此参数是指文本<br />
-fontdict:dict,此参数是一个可选参数，并且是一个覆盖默认文本属性的字典。如果fontdict为None，则由rcParams确定默认值。<br />
-<strong>返回值</strong>：此方法返回作为创建的文本实例的文本。</p>
-</div>
-<div class="section" id="suptitle">
-<h3>4.suptitle<a class="headerlink" href="#suptitle" title="永久链接至标题">¶</a></h3>
-<p>pyplot API：matplotlib.pyplot.suptitle(t, **kwargs)<br />
-OO API:suptitle(self, t, **kwargs)<br />
-<strong>参数</strong>：此方法接受以下描述的参数:<br />
-t: str,标题的文本<br />
-x：float,默认值是0.5.该参数是指文本在figure坐标系下的x坐标<br />
-y：float,默认值是0.95.该参数是指文本在figure坐标系下的y坐标<br />
-horizontalalignment, ha:该参数是指选择文本水平对齐方式，有三种选择{'center', 'left', right'}，默认值是 'center'<br />
-verticalalignment, va：该参数是指选择文本垂直对齐方式，有四种选择{'top', 'center', 'bottom', 'baseline'}，默认值是 'top'<br />
-fontsize, size：该参数是指文本的大小，默认值是依据rcParams的设置：rcParams[&quot;figure.titlesize&quot;] (default: 'large')<br />
-fontweight, weight：该参数是用来设置字重。默认值是依据rcParams的设置：rcParams[&quot;figure.titleweight&quot;] (default: 'normal')<br />
-fontproperties:None or dict,该参数是可选参数，如果该参数被指定，字体的大小将从该参数的默认值中提取。<br />
-<strong>返回值</strong>：此方法返回作为创建的title实例的文本。</p>
-</div>
-<div class="section" id="xlabelylabel">
-<h3>5.xlabel和ylabel<a class="headerlink" href="#xlabelylabel" title="永久链接至标题">¶</a></h3>
-<p>pyplot API：matplotlib.pyplot.xlabel(xlabel, fontdict=None, labelpad=None, *, loc=None, **kwargs)<br />
-     matplotlib.pyplot.ylabel(ylabel, fontdict=None, labelpad=None,*, loc=None, **kwargs)<br />
-OO API:  Axes.set_xlabel(self, xlabel, fontdict=None, labelpad=None, *, loc=None, **kwargs)<br />
-     Axes.set_ylabel(self, ylabel, fontdict=None, labelpad=None,*, loc=None, **kwargs)<br />
-<strong>参数</strong>：此方法接受以下描述的参数:<br />
-xlabel或者ylabel：label的文本<br />
-labelpad:设置label距离轴(axis)的距离<br />
-loc:{'left', 'center', 'right'},默认为center<br />
-**kwargs:<a class="reference external" href="https://matplotlib.org/api/text_api.html#matplotlib.text.Text">文本</a>属性<br />
-<strong>返回值</strong>：此方法返回作为创建的xlabel和ylabel实例的文本。</p>
+<div class="section" id="titlesuptitle">
+<h3>4.title和suptitle - 子图和画布的标题<a class="headerlink" href="#titlesuptitle" title="永久链接至标题">¶</a></h3>
+<p>title的调用方式为<code class="docutils literal notranslate"><span class="pre">Axes.set_title(label,</span> <span class="pre">fontdict=None,</span> <span class="pre">loc=None,</span> <span class="pre">pad=None,</span> <span class="pre">*,</span> <span class="pre">y=None,</span> <span class="pre">**kwargs)</span></code><br />
+其中label为子图标签的内容，<code class="docutils literal notranslate"><span class="pre">fontdict</span></code>,<code class="docutils literal notranslate"><span class="pre">loc</span></code>,<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>和之前小节相同不重复介绍<br />
+<code class="docutils literal notranslate"><span class="pre">pad</span></code>是指标题偏离图表顶部的距离，默认为6<br />
+<code class="docutils literal notranslate"><span class="pre">y</span></code>是title所在子图垂向的位置。默认值为1，即title位于子图的顶部。</p>
+<p>suptitle的调用方式为<code class="docutils literal notranslate"><span class="pre">figure.suptitle(t,</span> <span class="pre">**kwargs)</span></code><br />
+其中<code class="docutils literal notranslate"><span class="pre">t</span></code>为画布的标题内容</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#文本属性的输入一种是通过**kwargs属性这种方式，一种是通过操作 matplotlib.font_manager.FontProperties 方法</span>
-<span class="c1">#该案例中对于x_label采用**kwargs调整字体属性，y_label则采用 matplotlib.font_manager.FontProperties 方法调整字体属性</span>
-<span class="c1">#该链接是FontProperties方法的介绍 https://matplotlib.org/api/font_manager_api.html#matplotlib.font_manager.FontProperties</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
-
-<span class="n">font</span> <span class="o">=</span> <span class="n">FontProperties</span><span class="p">()</span>
-<span class="n">font</span><span class="o">.</span><span class="n">set_family</span><span class="p">(</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
-<span class="n">font</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">)</span>
-<span class="n">font</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [s]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Damped oscillation [V]&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 观察pad参数的使用效果</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;This is figure title&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span> <span class="c1"># 通过参数y设置高度</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;This is title&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;This is title&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_4_02.png" src="../_images/index_4_02.png" />
+<img alt="../_images/index_9_02.png" src="../_images/index_9_02.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
+</div>
+<div class="section" id="annotate">
+<h3>5.annotate - 子图的注解<a class="headerlink" href="#annotate" title="永久链接至标题">¶</a></h3>
+<p>annotate的调用方式为<code class="docutils literal notranslate"><span class="pre">Axes.annotate(text,</span> <span class="pre">xy,</span> <span class="pre">*args,</span> <span class="pre">**kwargs)</span></code><br />
+其中<code class="docutils literal notranslate"><span class="pre">text</span></code>为注解的内容，<br />
+<code class="docutils literal notranslate"><span class="pre">xy</span></code>为注解箭头指向的坐标，<br />
+其他常用的参数包括：<br />
+<code class="docutils literal notranslate"><span class="pre">xytext</span></code>为注解文字的坐标，<br />
+<code class="docutils literal notranslate"><span class="pre">xycoords</span></code>用来定义xy参数的坐标系，<br />
+<code class="docutils literal notranslate"><span class="pre">textcoords</span></code>用来定义xytext参数的坐标系，<br />
+<code class="docutils literal notranslate"><span class="pre">arrowprops</span></code>用来定义指向箭头的样式<br />
+annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多参数可以查看<a class="reference external" href="https://matplotlib.org/stable/tutorials/text/annotations.html#plotting-guide-annotation">官方文档中的annotate介绍</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">xycoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">&quot;arc3,rad=0.2&quot;</span><span class="p">)</span>
+            <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_11_02.png" src="../_images/index_11_02.png" />
+</div>
+</div>
+<p>​</p>
+<p>​</p>
 </div>
 <div class="section" id="id2">
 <h3>6.字体的属性设置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>字体设置一般有全局字体设置和自定义局部字体设置两种方法。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#首先可以查看matplotlib所有可用的字体</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
-<span class="n">font_family</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">ttflist</span>
-<span class="n">font_name_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">font_family</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">font</span> <span class="ow">in</span> <span class="n">font_name_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">font</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>STIXGeneral
-
-DejaVu Sans Mono
-
-DejaVu Sans
-
-DejaVu Sans Mono
-
-STIXGeneral
-
-DejaVu Serif Display
-
-STIXSizeOneSym
-
-DejaVu Serif
-
-STIXSizeFourSym
-
-STIXGeneral
-</pre></div>
-</div>
-</div>
-</div>
-<p>​</p>
 <p><a class="reference external" href="https://www.cnblogs.com/chendc/p/9298832.html">为方便在图中加入合适的字体，可以尝试了解中文字体的英文名称,该链接告诉了常用中文的英文名称</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#该block讲述如何在matplotlib里面，修改字体默认属性，完成全局字体的更改。</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimSun&#39;</span><span class="p">]</span>    <span class="c1"># 指定默认字体为新宋体。</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>      <span class="c1"># 解决保存图像时 负号&#39;-&#39; 显示为方块和报错的问题。</span>
 </pre></div>
@@ -585,130 +545,34 @@ STIXGeneral
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#局部字体的修改方法1</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fontmg</span>
-
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;小示例图标签&#39;</span><span class="p">)</span>
 
-<span class="c1"># 直接用字体的名字。</span>
+<span class="c1"># 直接用字体的名字</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x 轴名称参数&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>         <span class="c1"># 设置x轴名称，采用微软雅黑字体</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y 轴名称参数&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>         <span class="c1"># 设置Y轴名称</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;坐标系的标题&#39;</span><span class="p">,</span>  <span class="n">fontproperties</span><span class="o">=</span><span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>         <span class="c1"># 设置坐标系标题的字体</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">},</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>    <span class="c1"># 小示例图的字体设置</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">},</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="p">;</span>   <span class="c1"># 小示例图的字体设置</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_9_02.png" src="../_images/index_9_02.png" />
+<img alt="../_images/index_14_03.png" src="../_images/index_14_03.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#局部字体的修改方法2</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fontmg</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;小示例图标签&#39;</span><span class="p">)</span>
-<span class="c1">#fname为你系统中的字体库路径</span>
-<span class="n">my_font1</span> <span class="o">=</span> <span class="n">fontmg</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Windows\Fonts\simhei.ttf&#39;</span><span class="p">)</span>      <span class="c1"># 读取系统中的 黑体 字体。</span>
-<span class="n">my_font2</span> <span class="o">=</span> <span class="n">fontmg</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Windows\Fonts\simkai.ttf&#39;</span><span class="p">)</span>      <span class="c1"># 读取系统中的 楷体 字体。</span>
-<span class="c1"># fontproperties 设置中文显示，fontsize 设置字体大小</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x 轴名称参数&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>       <span class="c1"># 设置x轴名称</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y 轴名称参数&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>       <span class="c1"># 设置Y轴名称</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;坐标系的标题&#39;</span><span class="p">,</span>  <span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>       <span class="c1"># 标题的字体设置</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="n">my_font1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>              <span class="c1"># 小示例图的字体设置</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_10_02.png" src="../_images/index_10_02.png" />
-</div>
-</div>
-</div>
-<div class="section" id="id3">
-<h3>7.数学表达式<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
-<p>在文本标签中使用数学表达式。有关MathText的概述，请参见 <a class="reference external" href="https://matplotlib.org/tutorials/text/mathtext.html#sphx-glr-tutorials-text-mathtext-py">写数学表达式</a>,但由于数学表达式的练习想必我们都在markdown语法和latex语法中多少有接触，故在此不继续展开，愿意深入学习的可以参看官方文档.下面是一个官方案例，供参考了解。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha_i &gt; \beta_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\sum_{i=0}^\infty x_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mathcal</span><span class="si">{A}</span><span class="s1">\mathrm</span><span class="si">{sin}</span><span class="s1">(2 \omega t)$&#39;</span><span class="p">,</span>
-         <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (s)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;volts (mV)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_12_03.png" src="../_images/index_12_03.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#这是对前七节学习内容的总结案例</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
-
-<span class="c1"># 分别在figure和subplot上设置title</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;bold figure suptitle&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;axes title&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ylabel&#39;</span><span class="p">)</span>
-
-<span class="c1"># 设置x-axis和y-axis的范围都是[0, 10]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;boxed italics text in data coords&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
-        <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;an equation: $E=mc^2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">font1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span>  <span class="s1">&#39;purple&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="p">}</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;unicode: Institut für Festkörperphysik&#39;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="n">font1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;colored text in axes coords&#39;</span><span class="p">,</span>
-        <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
-        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_13_0.png" src="../_images/index_13_0.png" />
-</div>
-</div>
+<p>​</p>
+<p>​</p>
 </div>
 </div>
 <div class="section" id="tick">
 <h2>二、Tick上的文本<a class="headerlink" href="#tick" title="永久链接至标题">¶</a></h2>
 <p>设置tick（刻度）和ticklabel（刻度标签）也是可视化中经常需要操作的步骤，matplotlib既提供了自动生成刻度和刻度标签的模式（默认状态），同时也提供了许多让使用者灵活设置的方式。</p>
-<div class="section" id="id4">
-<h3>1.简单模式<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id3">
+<h3>1.简单模式<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <p>可以使用axis的<code class="docutils literal notranslate"><span class="pre">set_ticks</span></code>方法手动设置标签位置，使用axis的<code class="docutils literal notranslate"><span class="pre">set_ticklabels</span></code>方法手动设置标签格式</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -720,15 +584,16 @@ STIXGeneral
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">2.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">2.</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_16_02.png" src="../_images/index_16_02.png" />
+<img alt="../_images/index_17_02.png" src="../_images/index_17_02.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用axis的set_ticklabels方法手动设置标签格式的例子</span>
@@ -738,15 +603,16 @@ STIXGeneral
 <span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span>
 <span class="n">tickla</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tick</span><span class="si">:</span><span class="s1">1.2f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">]</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">(</span><span class="n">tickla</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">(</span><span class="n">tickla</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
+<img alt="../_images/index_19_02.png" src="../_images/index_19_02.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#一般绘图时会自动创建刻度，而如果通过上面的例子使用set_ticks创建刻度可能会导致tick的范围与所绘制图形的范围不一致的问题。</span>
@@ -764,8 +630,7 @@ STIXGeneral
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">,</span> <span class="s1">&#39;five&#39;</span><span class="p">,</span><span class="s1">&#39;six&#39;</span><span class="p">],</span><span class="c1">#设置刻度对应的标签</span>
                    <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span><span class="c1">#rotation选项设定x刻度标签倾斜30度。</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span><span class="c1">#set_ticks_position()方法是用来设置刻度所在的位置，常用的参数有bottom、top、both、none</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_ticklines</span><span class="p">())</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_ticklines</span><span class="p">());</span>
 </pre></div>
 </div>
 </div>
@@ -773,10 +638,9 @@ STIXGeneral
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a list of 14 Line2D ticklines objects&gt;
 </pre></div>
 </div>
-<img alt="../_images/index_18_1.png" src="../_images/index_18_1.png" />
+<img alt="../_images/index_21_1.png" src="../_images/index_21_1.png" />
 </div>
 </div>
-<p>​</p>
 </div>
 <div class="section" id="tick-locators-and-formatters">
 <h3>2.Tick Locators and Formatters<a class="headerlink" href="#tick-locators-and-formatters" title="永久链接至标题">¶</a></h3>
@@ -799,16 +663,15 @@ STIXGeneral
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
 
 <span class="n">formatter</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%1.5f</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_20_01.png" src="../_images/index_20_01.png" />
+<img alt="../_images/index_23_02.png" src="../_images/index_23_02.png" />
 </div>
 </div>
+<p>​</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 接收函数的例子</span>
@@ -821,15 +684,16 @@ STIXGeneral
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatoddticks</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatoddticks</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_21_03.png" src="../_images/index_21_03.png" />
+<img alt="../_images/index_25_02.png" src="../_images/index_25_02.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 <div class="section" id="b-tick-locators">
 <h4>b) Tick Locators<a class="headerlink" href="#b-tick-locators" title="永久链接至标题">¶</a></h4>
@@ -859,22 +723,20 @@ locator=plt.LinearLocator(numticks=5)#线性划分5等分，4个刻度</p>
 
 
 <span class="n">locator</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">28</span><span class="p">])</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">locator</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_23_02.png" src="../_images/index_23_02.png" />
+<img alt="../_images/index_27_02.png" src="../_images/index_27_02.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <p>此外<code class="docutils literal notranslate"><span class="pre">matplotlib.dates</span></code> 模块还提供了特殊的设置日期型刻度格式和位置的方式</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="c1"># 特殊的日期型locator和formatter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 特殊的日期型locator和formatter</span>
 <span class="n">locator</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DayLocator</span><span class="p">(</span><span class="n">bymonthday</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
 <span class="n">formatter</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
 
@@ -884,176 +746,149 @@ locator=plt.LinearLocator(numticks=5)#线性划分5等分，4个刻度</p>
 <span class="n">base</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="n">base</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">))]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_25_02.png" src="../_images/index_25_02.png" />
+<img alt="../_images/index_29_0.png" src="../_images/index_29_0.png" />
 </div>
 </div>
-<p><strong>其他进阶案例</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#这个案例中展示了如何进行坐标轴的移动，如何更改刻度值的样式</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">new_ticks1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">new_ticks1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="sa">r</span><span class="s1">&#39;$one\ shu$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\alpha$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$three$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;four&#39;</span><span class="p">])</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">上一行代码是将y轴上的小标改成文字,其中，空格需要增加\，即&#39;\ &#39;,$可将格式更改成数字模式，如果需要输入数学形式的α，则需要用\转换，即\alpha</span>
-<span class="sd">如果使用面向对象的命令进行画图，那么下面两行代码可以实现与 plt.yticks([-2,0,2,5],[r&#39;$one\ shu$&#39;,r&#39;$\alpha$&#39;,r&#39;$three$&#39;,r&#39;four&#39;]) 同样的功能</span>
-<span class="sd">axs.set_yticks([-2,0,2,5])</span>
-<span class="sd">axs.set_yticklabels([r&#39;$one\ shu$&#39;,r&#39;$\alpha$&#39;,r&#39;$three$&#39;,r&#39;four&#39;])</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="c1">#gca = &#39;get current axes&#39; 获取现在的轴</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">ax = plt.gca()是获取当前的axes，其中gca代表的是get current axes。</span>
-<span class="sd">fig=plt.gcf是获取当前的figure，其中gcf代表的是get current figure。</span>
-
-<span class="sd">许多函数都是对当前的Figure或Axes对象进行处理，</span>
-<span class="sd">例如plt.plot()实际上会通过plt.gca()获得当前的Axes对象ax，然后再调用ax.plot()方法实现真正的绘图。</span>
-
-<span class="sd">而在本例中则可以通过ax.spines方法获得当前顶部和右边的轴并将其颜色设置为不可见</span>
-<span class="sd">然后将左边轴和底部的轴所在的位置重新设置</span>
-<span class="sd">最后再通过set_ticks_position方法设置ticks在x轴或y轴的位置，本示例中因所设置的bottom和left是ticks在x轴或y轴的默认值，所以这两行的代码也可以不写</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="c1">#axes 百分比</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>   <span class="c1">#设置ticks在x轴的位置</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>     <span class="c1">#设置ticks在y轴的位置</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_27_02.png" src="../_images/index_27_02.png" />
-</div>
-</div>
+<p>​</p>
 </div>
 </div>
 </div>
 <div class="section" id="legend">
-<h2>三、<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend">legend</a>（图例）<a class="headerlink" href="#legend" title="永久链接至标题">¶</a></h2>
-<p>图例的设置会使用一些常见术语，为了清楚起见，这些术语在此处进行说明：
-**  legend entry（图例条目）**
-图例有一个或多个legend entries组成。一个entry由一个key和一个label组成。
-**  legend key（图例键）**
-每个 legend label左面的colored/patterned marker（彩色/图案标记）
-**  legend label（图例标签）**
-描述由key来表示的handle的文本
-** legend handle（图例句柄）**
+<h2>三、legend（图例）<a class="headerlink" href="#legend" title="永久链接至标题">¶</a></h2>
+<p>在具体学习图例之前，首先解释几个术语：<br />
+<strong>legend entry（图例条目)</strong><br />
+每个图例由一个或多个legend entries组成。一个entry包含一个key和其对应的label。<br />
+<strong>legend key（图例键)</strong><br />
+每个legend label左面的colored/patterned marker（彩色/图案标记）<br />
+<strong>legend label（图例标签)</strong><br />
+描述由key来表示的handle的文本<br />
+<strong>legend handle（图例句柄)</strong><br />
 用于在图例中生成适当图例条目的原始对象</p>
 <p>以下面这个图为例，右侧的方框中的共有两个legend entry；两个legend key，分别是一个蓝色和一个黄色的legend key；两个legend label，一个名为‘Line up’和一个名为‘Line Down’的legend label</p>
-<p>常用的几个参数：</p>
-<p>(1)设置图列位置</p>
-<p>plt.legend(loc='upper center') 等同于plt.legend(loc=9)，对应关系如下表。</p>
+<p><img alt="" src="https://img-blog.csdnimg.cn/1442273f150044139d54b6c2c6384e37.png" /></p>
+<p>图例的绘制同样有OO模式和pyplot模式两种方式，写法都是一样的，使用legend()即可调用。<br />
+以下面的代码为例，在使用legend方法时，我们可以手动传入两个变量，句柄和标签，用以指定条目中的特定绘图对象和显示的标签值。<br />
+当然通常更简单的操作是不传入任何参数，此时matplotlib会自动寻找合适的图例条目。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">line_up</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Line 2&#39;</span><span class="p">)</span>
+<span class="n">line_down</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Line 1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">line_up</span><span class="p">,</span> <span class="n">line_down</span><span class="p">],</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Line Up&#39;</span><span class="p">,</span> <span class="s1">&#39;Line Down&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_31_01.png" src="../_images/index_31_01.png" />
+</div>
+</div>
+<p>legend其他常用的几个参数如下：</p>
+<p><strong>设置图例位置</strong><br />
+loc参数接收一个字符串或数字表示图例出现的位置<br />
+ax.legend(loc='upper center') 等同于ax.legend(loc=9)</p>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>loc by number</p></th>
-<th class="head"><p>loc by text</p></th>
+<tr class="row-odd"><th class="head"><p>Location String</p></th>
+<th class="head"><p>Location Code</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>'best'</p></td>
+<tr class="row-even"><td><p>'best'</p></td>
+<td><p>0</p></td>
 </tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>'upper right'</p></td>
+<tr class="row-odd"><td><p>'upper right'</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>2</p></td>
-<td><p>'upper left'</p></td>
+<tr class="row-even"><td><p>'upper left'</p></td>
+<td><p>2</p></td>
 </tr>
-<tr class="row-odd"><td><p>3</p></td>
-<td><p>'lower left'</p></td>
+<tr class="row-odd"><td><p>'lower left'</p></td>
+<td><p>3</p></td>
 </tr>
-<tr class="row-even"><td><p>4</p></td>
-<td><p>'lower right'</p></td>
+<tr class="row-even"><td><p>'lower right'</p></td>
+<td><p>4</p></td>
 </tr>
-<tr class="row-odd"><td><p>5</p></td>
-<td><p>'right'</p></td>
+<tr class="row-odd"><td><p>'right'</p></td>
+<td><p>5</p></td>
 </tr>
-<tr class="row-even"><td><p>6</p></td>
-<td><p>'center left'</p></td>
+<tr class="row-even"><td><p>'center left'</p></td>
+<td><p>6</p></td>
 </tr>
-<tr class="row-odd"><td><p>7</p></td>
-<td><p>'center right'</p></td>
+<tr class="row-odd"><td><p>'center right'</p></td>
+<td><p>7</p></td>
 </tr>
-<tr class="row-even"><td><p>8</p></td>
-<td><p>'lower center'</p></td>
+<tr class="row-even"><td><p>'lower center'</p></td>
+<td><p>8</p></td>
 </tr>
-<tr class="row-odd"><td><p>9</p></td>
-<td><p>'upper center'</p></td>
+<tr class="row-odd"><td><p>'upper center'</p></td>
+<td><p>9</p></td>
 </tr>
-<tr class="row-even"><td><p>10</p></td>
-<td><p>'center'</p></td>
+<tr class="row-even"><td><p>'center'</p></td>
+<td><p>10</p></td>
 </tr>
 </tbody>
 </table>
-<p>(2)设置图例字体大小</p>
-<p>fontsize : int or float or {‘xx-small’, ‘x-small’, ‘small’, ‘medium’, ‘large’, ‘x-large’, ‘xx-large’}</p>
-<p>(3)设置图例边框及背景</p>
-<p>plt.legend(loc='best',frameon=False) #去掉图例边框<br />
-plt.legend(loc='best',edgecolor='blue') #设置图例边框颜色<br />
-plt.legend(loc='best',facecolor='blue') #设置图例背景颜色,若无边框,参数无效</p>
-<p>(4)设置图例标题</p>
-<p>legend = plt.legend([&quot;CH&quot;, &quot;US&quot;], title='China VS Us')</p>
-<p>(5)设置图例名字及对应关系</p>
-<p>legend = plt.legend([p1, p2], [&quot;CH&quot;, &quot;US&quot;])</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_up</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Line 2&#39;</span><span class="p">)</span>
-<span class="n">line_down</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Line 1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">line_up</span><span class="p">,</span> <span class="n">line_down</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Line Up&#39;</span><span class="p">,</span> <span class="s1">&#39;Line Down&#39;</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span><span class="c1">#loc参数设置图例所在的位置，title设置图例的标题，frameon参数将图例边框给去掉</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># 观察loc参数传入不同值时图例的位置</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_29_01.png" src="../_images/index_29_01.png" />
+<img alt="../_images/index_33_01.png" src="../_images/index_33_01.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
+<p><strong>设置图例边框及背景</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#这个案例是显示多图例legend</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">p2</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">l1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">p2</span><span class="p">,</span> <span class="n">p1</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;line 2&quot;</span><span class="p">,</span> <span class="s2">&quot;line 1&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
- 
-<span class="n">p3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">p4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
-<span class="c1"># 下面这行代码由于添加了新的legend，所以会将l1从legend中给移除</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;label1&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># 为了保留之前的l1这个legend，所以必须要通过plt.gca()获得当前的axes，然后将l1作为单独的artist</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">l1</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ax </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#去掉图例边框</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span> <span class="c1">#设置图例边框颜色</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span> <span class="c1">#设置图例背景颜色,若无边框,参数无效</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_30_0.png" src="../_images/index_30_0.png" />
+<img alt="../_images/index_35_0.png" src="../_images/index_35_0.png" />
 </div>
 </div>
+<p>​</p>
+<p><strong>设置图例标题</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;legend title&#39;</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="id5">
-<h2>参考资料<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="https://matplotlib.org/stable/tutorials/text/text_intro.html#sphx-glr-tutorials-text-text-intro-py">1.matplotlib官网文字使用指南</a></p>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/index_37_01.png" src="../_images/index_37_01.png" />
+</div>
+</div>
+<p>​</p>
+<p>​</p>
+</div>
+<div class="section" id="id4">
+<h2>思考题<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>请尝试使用两种方式模仿画出下面的图表(重点是柱状图上的标签)，本文学习的text方法和matplotlib自带的柱状图标签方法bar_label
+<img alt="" src="https://img-blog.csdnimg.cn/99bc6e007eb34fc09015589d56c6eafc.png" /></p></li>
+</ul>
 </div>
 </div>
 

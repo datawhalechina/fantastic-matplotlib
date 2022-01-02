@@ -167,6 +167,3 @@ ax.legend() ;
 - 请思考两种绘图模式的优缺点和各自适合的使用场景
 - 在第五节绘图模板中我们是以OO模式作为例子展示的，请思考并写一个pyplot绘图模式的简单模板
 
-## 参考资料
-
-[1.matplotlib官网用户指南](https://matplotlib.org/stable/tutorials/introductory/usage.html)

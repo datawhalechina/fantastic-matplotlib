@@ -205,11 +205,6 @@
      3.设置rcparams
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlibrc">
-     4.修改matplotlibrc文件
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -251,7 +246,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   参考资料
+   思考题
   </a>
  </li>
 </ul>
@@ -268,7 +263,7 @@
   <div class="section" id="id1">
 <h1>第五回：样式色彩秀芳华<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>第五回详细介绍matplotlib中样式和颜色的使用，绘图样式和颜色是丰富可视化图表的重要手段，因此熟练掌握本章可以让可视化图表变得更美观，突出重点和凸显艺术性。<br />
-关于绘图样式，常见的有4种方法，分别是修改预定义样式，自定义样式，rcparams和matplotlibrc文件。<br />
+关于绘图样式，常见的有3种方法，分别是修改预定义样式，自定义样式和rcparams。<br />
 关于颜色使用，本章介绍了常见的5种表示单色颜色的基本方法，以及colormap多色显示的方法。</p>
 <div class="section" id="matplotlib-style">
 <h2>一、matplotlib的绘图样式（style）<a class="headerlink" href="#matplotlib-style" title="永久链接至标题">¶</a></h2>
@@ -398,25 +393,6 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 </div>
-<div class="section" id="matplotlibrc">
-<h3>4.修改matplotlibrc文件<a class="headerlink" href="#matplotlibrc" title="永久链接至标题">¶</a></h3>
-<p>由于matplotlib是使用matplotlibrc文件来控制样式的，也就是上一节提到的rc setting，所以我们还可以通过修改matplotlibrc文件的方式改变样式。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查找matplotlibrc文件的路径</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;c:\\users\\skywater\\pycharmprojects\\personal\\demo\\lib\\site-packages\\matplotlib\\mpl-data\\matplotlibrc&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<p>找到路径后，就可以直接编辑样式文件了，打开后看到的文件格式大致是这样的，文件中列举了所有的样式参数，找到想要修改的参数，比如lines.linewidth: 8，并将前面的注释符号去掉，此时再绘图发现样式以及生效了。</p>
-<p><img alt="" src="https://img-blog.csdnimg.cn/20201124005855980.PNG" /></p>
-</div>
 </div>
 <div class="section" id="matplotlib-color">
 <h2>二、matplotlib的色彩设置（color）<a class="headerlink" href="#matplotlib-color" title="永久链接至标题">¶</a></h2>
@@ -446,7 +422,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_19_01.png" src="../_images/index_19_01.png" />
+<img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
 </div>
 </div>
 </div>
@@ -461,7 +437,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_21_02.png" src="../_images/index_21_02.png" />
+<img alt="../_images/index_19_01.png" src="../_images/index_19_01.png" />
 </div>
 </div>
 <p>RGB颜色和HEX颜色之间是可以一一对应的，以下网址提供了两种色彩表示方法的转换工具。<br />
@@ -477,7 +453,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_23_01.png" src="../_images/index_23_01.png" />
+<img alt="../_images/index_21_02.png" src="../_images/index_21_02.png" />
 </div>
 </div>
 </div>
@@ -491,7 +467,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_25_01.png" src="../_images/index_25_01.png" />
+<img alt="../_images/index_23_01.png" src="../_images/index_23_01.png" />
 </div>
 </div>
 </div>
@@ -505,7 +481,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_27_01.png" src="../_images/index_27_01.png" />
+<img alt="../_images/index_25_01.png" src="../_images/index_25_01.png" />
 </div>
 </div>
 <p><img alt="" src="https://matplotlib.org/3.1.0/_images/sphx_glr_named_colors_002.png" />
@@ -531,7 +507,7 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_29_0.png" src="../_images/index_29_0.png" />
+<img alt="../_images/index_27_01.png" src="../_images/index_27_01.png" />
 </div>
 </div>
 <p>在以下官网页面可以查询上述五种colormap的字符串表示和颜色图的对应关系<br />
@@ -539,9 +515,10 @@ ytick.labelsize : 16</p>
 </div>
 </div>
 <div class="section" id="id5">
-<h2>参考资料<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html?highlight=rcparams">1.matplotlib官网样式使用指南</a><br />
-<a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py">2.matplotlib官网色彩使用指南</a></p>
+<h2>思考题<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>学习如何自定义colormap，并将其应用到任意一个数据集中，绘制一幅图像，注意colormap的类型要和数据集的特性相匹配，并做简单解释</p></li>
+</ul>
 </div>
 </div>
 
