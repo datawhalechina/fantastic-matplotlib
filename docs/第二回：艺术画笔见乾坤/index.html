@@ -201,11 +201,6 @@
      2. Artist的分类
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib">
-     3. matplotlib标准用法
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -293,6 +288,11 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
+   思考题
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
    参考资料
   </a>
  </li>
@@ -307,7 +307,21 @@
         
               <div>
                 
-  <div class="section" id="id1">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>   
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">Wedge</span>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">PatchCollection</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
 <h1>第二回：艺术画笔见乾坤<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id2">
 <h2>一、概述<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
@@ -332,52 +346,58 @@
 <p><code class="docutils literal notranslate"><span class="pre">primitive</span></code>是基本要素，它包含一些我们要在绘图区作图用到的标准图形对象，如<strong>曲线Line2D，文字text，矩形Rectangle，图像image</strong>等。</p>
 <p><code class="docutils literal notranslate"><span class="pre">container</span></code>是容器，即用来装基本要素的地方，包括<strong>图形figure、坐标系Axes和坐标轴Axis</strong>。他们之间的关系如下图所示：<br />
 <img alt="分类" src="https://img-blog.csdnimg.cn/20201122230916134.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODYwNDk2MQ==,size_16,color_FFFFFF,t_70#pic_center" /></p>
-</div>
-<div class="section" id="matplotlib">
-<h3>3. matplotlib标准用法<a class="headerlink" href="#matplotlib" title="永久链接至标题">¶</a></h3>
-<p>matplotlib的标准使用流程为：</p>
-<ol class="simple">
-<li><p>创建一个<code class="docutils literal notranslate"><span class="pre">Figure</span></code>实例</p></li>
-<li><p>使用<code class="docutils literal notranslate"><span class="pre">Figure</span></code>实例创建一个或者多个<code class="docutils literal notranslate"><span class="pre">Axes</span></code>或<code class="docutils literal notranslate"><span class="pre">Subplot</span></code>实例</p></li>
-<li><p>使用<code class="docutils literal notranslate"><span class="pre">Axes</span></code>实例的辅助方法来创建<code class="docutils literal notranslate"><span class="pre">primitive</span></code></p></li>
-</ol>
-<p>值得一提的是，Axes是一种容器，它可能是matplotlib API中最重要的类，并且我们大多数时间都花在和它打交道上。更具体的信息会在第三节容器小节说明。</p>
-<p>一个流程示例及说明如下：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># step 1 </span>
-<span class="c1"># 我们用 matplotlib.pyplot.figure() 创建了一个Figure实例</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
-<span class="c1"># step 2</span>
-<span class="c1"># 然后用Figure实例创建了一个两行一列(即可以有两个subplot)的绘图区，并同时在第一个位置创建了一个subplot</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># two rows, one column, first plot</span>
-
-<span class="c1"># step 3</span>
-<span class="c1"># 然后用Axes实例的方法画了一条曲线</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_1_0.png" src="../_images/index_1_0.png" />
-</div>
-</div>
+<p>可视化中常见的artist类可以参考下图这张表格，解释下每一列的含义。<br />
+第一列表示matplotlib中子图上的辅助方法，可以理解为可视化中不同种类的图表类型，如柱状图，折线图，直方图等，这些图表都可以用这些辅助方法直接画出来，属于更高层级的抽象。</p>
+<p>第二列表示不同图表背后的artist类，比如折线图方法<code class="docutils literal notranslate"><span class="pre">plot</span></code>在底层用到的就是<code class="docutils literal notranslate"><span class="pre">Line2D</span></code>这一artist类。</p>
+<p>第三列是第二列的列表容器，例如所有在子图中创建的<code class="docutils literal notranslate"><span class="pre">Line2D</span></code>对象都会被自动收集到<code class="docutils literal notranslate"><span class="pre">ax.lines</span></code>返回的列表中。</p>
+<p>下一节的具体案例更清楚地阐释了这三者的关系，其实在很多时候，我们只用记住第一列的辅助方法进行绘图即可，而无需关注具体底层使用了哪些类，但是了解底层类有助于我们绘制一些复杂的图表，因此也很有必要了解。</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Axes helper method</p></th>
+<th class="head"><p>Artist</p></th>
+<th class="head"><p>Container</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bar</span></code> - bar charts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code></p></td>
+<td><p>ax.patches</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">errorbar</span></code> - error bar plots</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Line2D</span></code> and <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code></p></td>
+<td><p>ax.lines and ax.patches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fill</span></code> - shared area</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Polygon</span></code></p></td>
+<td><p>ax.patches</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hist</span></code> - histograms</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code></p></td>
+<td><p>ax.patches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">imshow</span></code> - image data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AxesImage</span></code></p></td>
+<td><p>ax.images</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">plot</span></code> - xy plots</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Line2D</span></code></p></td>
+<td><p>ax.lines</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scatter</span></code> - scatter charts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PolyCollection</span></code></p></td>
+<td><p>ax.collections</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="primitives">
 <h2>二、基本元素 - primitives<a class="headerlink" href="#primitives" title="永久链接至标题">¶</a></h2>
 <p>各容器中可能会包含多种<code class="docutils literal notranslate"><span class="pre">基本要素-primitives</span></code>, 所以先介绍下primitives，再介绍容器。</p>
-<p>本章重点介绍下 <code class="docutils literal notranslate"><span class="pre">primitives</span></code> 的几种类型：<strong>曲线-Line2D，矩形-Rectangle，图像-image</strong> （其中文本-Text较为复杂，会在之后单独详细说明。）</p>
+<p>本章重点介绍下 <code class="docutils literal notranslate"><span class="pre">primitives</span></code> 的几种类型：<strong>曲线-Line2D，矩形-Rectangle，多边形-Polygon，图像-image</strong></p>
 <div class="section" id="dlines">
 <h3>1. 2DLines<a class="headerlink" href="#dlines" title="永久链接至标题">¶</a></h3>
-<p>在matplotlib中曲线的绘制，主要是通过类 <code class="docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code> 来完成的。<br />
-它的基类: <code class="docutils literal notranslate"><span class="pre">matplotlib.artist.Artist</span></code></p>
+<p>在matplotlib中曲线的绘制，主要是通过类 <code class="docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code> 来完成的。</p>
 <p>matplotlib中<code class="docutils literal notranslate"><span class="pre">线-line</span></code>的含义：它表示的可以是连接所有顶点的实线样式，也可以是每个顶点的标记。此外，这条线也会受到绘画风格的影响，比如，我们可以创建虚线种类的线。</p>
 <p>它的构造函数：</p>
 <blockquote>
@@ -393,7 +413,7 @@
 <li><p><strong>marker</strong>:点的标记，详细可参考<a class="reference external" href="https://matplotlib.org/api/markers_api.html#module-matplotlib.markers">markers API</a></p></li>
 <li><p><strong>markersize</strong>:标记的size</p></li>
 </ul>
-<p>其他详细参数可参考<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.lines.Line2D.html#examples-using-matplotlib-lines-line2d">Line2D官方文档</a></p>
+<p>其他详细参数可参考<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html">Line2D官方文档</a></p>
 <div class="section" id="a-line2d">
 <h4>a. 如何设置Line2D的属性<a class="headerlink" href="#a-line2d" title="永久链接至标题">¶</a></h4>
 <p>有三种方法可以用设置线的属性。</p>
@@ -405,7 +425,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) 直接在plot()函数中设置</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span> <span class="c1"># 设置线的粗细参数为10</span>
@@ -413,7 +432,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_3_01.png" src="../_images/index_3_01.png" />
+<img alt="../_images/index_2_01.png" src="../_images/index_2_01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -421,13 +440,13 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2) 通过获得线对象，对线对象进行设置</span>
 <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
-<span class="n">line</span><span class="o">.</span><span class="n">set_antialiased</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># 关闭抗锯齿功能</span>
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="c1"># 这里等号坐标的line,是一个列表解包的操作，目的是获取plt.plot返回列表中的Line2D对象</span>
+<span class="n">line</span><span class="o">.</span><span class="n">set_antialiased</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span> <span class="c1"># 关闭抗锯齿功能</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_4_01.png" src="../_images/index_4_01.png" />
+<img alt="../_images/index_3_01.png" src="../_images/index_3_01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -441,7 +460,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_5_01.png" src="../_images/index_5_01.png" />
+<img alt="../_images/index_4_01.png" src="../_images/index_4_01.png" />
 </div>
 </div>
 </div>
@@ -451,18 +470,45 @@
 <li><p>绘制直线line</p></li>
 <li><p>errorbar绘制误差折线图</p></li>
 </ol>
-<p>绘制直线line常用的方法有两种:</p>
+<p>介绍两种绘制直线line常用的方法:</p>
 <ul class="simple">
-<li><p><strong>pyplot方法绘制</strong></p></li>
+<li><p><strong>plot方法绘制</strong></p></li>
 <li><p><strong>Line2D对象绘制</strong></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. pyplot方法绘制</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. plot方法绘制</span>
 <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">y2</span><span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">);</span> <span class="c1"># 通过直接使用辅助方法画线，打印ax.lines后可以看到在matplotlib在底层创建了两个Line2D对象</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x000001EBFE710A90&gt;, &lt;matplotlib.lines.Line2D object at 0x000001EBFE710E20&gt;]
+</pre></div>
+</div>
+<img alt="../_images/index_6_1.png" src="../_images/index_6_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Line2D对象绘制</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">y2</span><span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Line2D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)]</span>  <span class="c1"># 显式创建Line2D对象</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="c1"># 使用add_line方法将创建的Line2D添加到子图中</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -470,27 +516,8 @@
 <img alt="../_images/index_7_01.png" src="../_images/index_7_01.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Line2D对象绘制</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>      
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">line</span> <span class="o">=</span> <span class="n">Line2D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/index_8_01.png" src="../_images/index_8_01.png" />
-</div>
-</div>
+<p>​<br />
+​</p>
 <p><strong>2) errorbar绘制误差折线图</strong><br />
 pyplot里有个专门绘制误差线的功能，通过<code class="docutils literal notranslate"><span class="pre">errorbar</span></code>类实现，它的构造函数：</p>
 <blockquote>
@@ -509,9 +536,7 @@ pyplot里有个专门绘制误差线的功能，通过<code class="docutils lite
 <p>绘制errorbar</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 <span class="n">yerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -520,21 +545,24 @@ pyplot里有个专门绘制误差线的功能，通过<code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_10_01.png" src="../_images/index_10_01.png" />
+<img alt="../_images/index_9_01.png" src="../_images/index_9_01.png" />
 </div>
 </div>
+<p>​<br />
+​</p>
 </div>
 </div>
 <div class="section" id="patches">
 <h3>2. patches<a class="headerlink" href="#patches" title="永久链接至标题">¶</a></h3>
-<p>matplotlib.patches.Patch类是二维图形类。它的基类是matplotlib.artist.Artist，它的构造函数：<br />
-详细清单见 <a class="reference external" href="https://matplotlib.org/api/patches_api.html">matplotlib.patches API</a></p>
+<p>matplotlib.patches.Patch类是二维图形类，并且它是众多二维图形的父类，它的所有子类见<a class="reference external" href="https://matplotlib.org/stable/api/patches_api.html">matplotlib.patches API</a>  ，<br />
+Patch类的构造函数：</p>
 <blockquote>
 <div><p>Patch(edgecolor=None, facecolor=None, color=None,
 linewidth=None, linestyle=None, antialiased=None,
 hatch=None, fill=True, capstyle=None, joinstyle=None,
 **kwargs)</p>
 </div></blockquote>
+<p>本小节重点讲述三种最常见的子类，矩形，多边形和楔型。</p>
 <div class="section" id="a-rectangle">
 <h4>a. Rectangle-矩形<a class="headerlink" href="#a-rectangle" title="永久链接至标题">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>矩形类在官网中的定义是： 通过锚点xy及其宽度和高度生成。
@@ -542,7 +570,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <blockquote>
 <div><p>class matplotlib.patches.Rectangle(xy, width, height, angle=0.0, **kwargs)</p>
 </div></blockquote>
-<p>在实际中最常见的矩形图是**<code class="docutils literal notranslate"><span class="pre">hist直方图</span></code>和<code class="docutils literal notranslate"><span class="pre">bar条形图</span></code>**。</p>
+<p>在实际中最常见的矩形图是<code class="docutils literal notranslate"><span class="pre">hist直方图</span></code>和<code class="docutils literal notranslate"><span class="pre">bar条形图</span></code>。</p>
 <p><strong>1) hist-直方图</strong></p>
 <blockquote>
 <div><p>matplotlib.pyplot.hist(x,bins=None,range=None, density=None, bottom=None, histtype='bar', align='mid', log=False, color=None, label=None, stacked=False, normed=None)</p>
@@ -561,28 +589,24 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <p>hist绘制直方图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#生成[0-100)之间的100个数据,即 数据集 </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#生成[0-100)之间的100个数据,即 数据集 </span>
 <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#设置连续的边界值，即直方图的分布区间[0,10),[10,20)... </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;fuchsia&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="c1">#alpha设置透明度，0为完全透明 </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="c1">#设置x轴分布范围 </span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span> <span class="c1">#设置x轴分布范围 plt.show()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_12_0.png" src="../_images/index_12_0.png" />
+<img alt="../_images/index_11_01.png" src="../_images/index_11_01.png" />
 </div>
 </div>
+<p>​</p>
 <p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>矩形类绘制直方图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fenzu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -594,7 +618,6 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <span class="n">df_cnt</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="c1">#用Rectangle把hist绘制出来</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
@@ -604,15 +627,16 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
     <span class="n">ax1</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
 
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_14_0.png" src="../_images/index_14_0.png" />
+<img alt="../_images/index_13_01.png" src="../_images/index_13_01.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <p><strong>2) bar-柱状图</strong></p>
 <blockquote>
 <div><p>matplotlib.pyplot.bar(left, height, alpha=1, width=0.8, color=, edgecolor=, label=, lw=3)</p>
@@ -635,20 +659,19 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bar绘制柱状图</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">y</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;The First Bar&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_16_0.png" src="../_images/index_16_0.png" />
+<img alt="../_images/index_15_01.png" src="../_images/index_15_01.png" />
 </div>
 </div>
+<p>​</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rectangle矩形类绘制柱状图</span>
-<span class="c1">#import matplotlib.pyplot as plt</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
@@ -656,8 +679,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
     <span class="n">rect</span> <span class="o">=</span>  <span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mf">0.5</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -665,10 +687,12 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 <div class="section" id="b-polygon">
 <h4>b. Polygon-多边形<a class="headerlink" href="#b-polygon" title="永久链接至标题">¶</a></h4>
-<p>matplotlib.patches.Polygon类是多边形类。其基类是matplotlib.patches.Patch，它的构造函数：</p>
+<p>matplotlib.patches.Polygon类是多边形类。它的构造函数：</p>
 <blockquote>
 <div><p>class matplotlib.patches.Polygon(xy, closed=True, **kwargs)</p>
 </div></blockquote>
@@ -682,7 +706,6 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 用fill来绘制图形</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> 
 <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> 
@@ -694,6 +717,8 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_19_0.png" src="../_images/index_19_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 <div class="section" id="c-wedge">
 <h4>c. Wedge-契形<a class="headerlink" href="#c-wedge" title="永久链接至标题">¶</a></h4>
@@ -719,14 +744,12 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <p>pie绘制饼状图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
-<span class="n">labels</span> <span class="o">=</span> <span class="s1">&#39;Frogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Logs&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="s1">&#39;Frogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Logs&#39;</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
 <span class="n">explode</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
 <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span> 
 <span class="n">ax1</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="n">explode</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span> 
-<span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span> <span class="c1"># Equal aspect ratio ensures that pie is drawn as a circle. </span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span> <span class="c1"># Equal aspect ratio ensures that pie is drawn as a circle. </span>
 </pre></div>
 </div>
 </div>
@@ -734,29 +757,26 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_21_0.png" src="../_images/index_21_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <p>wedge绘制饼图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
-<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">Wedge</span>
-<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">PatchCollection</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 <span class="n">theta1</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
 <span class="n">patches</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">patches</span> <span class="o">+=</span> <span class="p">[</span>
-    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="mf">.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">54</span><span class="p">),</span>             <span class="c1"># Full circle</span>
-    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="mf">.2</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">162</span><span class="p">),</span>  <span class="c1"># Full ring</span>
-    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="mf">.2</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">324</span><span class="p">),</span>              <span class="c1"># Full sector</span>
-    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="mf">.2</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">360</span><span class="p">),</span>  <span class="c1"># Ring sector</span>
+    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mf">.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">54</span><span class="p">),</span>           
+    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mf">.4</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">162</span><span class="p">),</span>  
+    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mf">.4</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">324</span><span class="p">),</span>           
+    <span class="n">Wedge</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mf">.4</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">360</span><span class="p">),</span>  
 <span class="p">]</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">patches</span><span class="p">))</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">PatchCollection</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">PatchCollection</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -764,6 +784,8 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_23_0.png" src="../_images/index_23_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 </div>
 <div class="section" id="collections">
@@ -786,8 +808,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span> 
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
 <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -795,6 +816,8 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_25_0.png" src="../_images/index_25_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 <div class="section" id="images">
 <h3>4. images<a class="headerlink" href="#images" title="永久链接至标题">¶</a></h3>
@@ -809,9 +832,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <p>使用imshow画图时首先需要传入一个数组，数组对应的是空间内的像素位置和像素点的值，interpolation参数可以设置不同的差值方法，具体效果如下。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> <span class="s1">&#39;spline16&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> <span class="s1">&#39;spline16&#39;</span><span class="p">,</span>
            <span class="s1">&#39;spline36&#39;</span><span class="p">,</span> <span class="s1">&#39;hanning&#39;</span><span class="p">,</span> <span class="s1">&#39;hamming&#39;</span><span class="p">,</span> <span class="s1">&#39;hermite&#39;</span><span class="p">,</span> <span class="s1">&#39;kaiser&#39;</span><span class="p">,</span> <span class="s1">&#39;quadric&#39;</span><span class="p">,</span>
            <span class="s1">&#39;catrom&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;bessel&#39;</span><span class="p">,</span> <span class="s1">&#39;mitchell&#39;</span><span class="p">,</span> <span class="s1">&#39;sinc&#39;</span><span class="p">,</span> <span class="s1">&#39;lanczos&#39;</span><span class="p">]</span>
 
@@ -825,8 +846,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">interp_method</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">interp_method</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -834,6 +854,8 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_27_0.png" src="../_images/index_27_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 </div>
 </div>
 <div class="section" id="object-container">
@@ -842,7 +864,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 比如<code class="docutils literal notranslate"><span class="pre">Axes</span> <span class="pre">Artist</span></code>，它是一种容器，它包含了很多<code class="docutils literal notranslate"><span class="pre">primitives</span></code>，比如<code class="docutils literal notranslate"><span class="pre">Line2D</span></code>，<code class="docutils literal notranslate"><span class="pre">Text</span></code>；同时，它也有自身的属性，比如<code class="docutils literal notranslate"><span class="pre">xscal</span></code>，用来控制X轴是<code class="docutils literal notranslate"><span class="pre">linear</span></code>还是<code class="docutils literal notranslate"><span class="pre">log</span></code>的。</p>
 <div class="section" id="figure">
 <h3>1. Figure容器<a class="headerlink" href="#figure" title="永久链接至标题">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code>是<code class="docutils literal notranslate"><span class="pre">Artist</span></code>最顶层的<code class="docutils literal notranslate"><span class="pre">container</span></code>-对象容器，它包含了图表中的所有元素。一张图表的背景就是在<code class="docutils literal notranslate"><span class="pre">Figure.patch</span></code>的一个矩形<code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>。<br />
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code>是<code class="docutils literal notranslate"><span class="pre">Artist</span></code>最顶层的<code class="docutils literal notranslate"><span class="pre">container</span></code>对象容器，它包含了图表中的所有元素。一张图表的背景就是在<code class="docutils literal notranslate"><span class="pre">Figure.patch</span></code>的一个矩形<code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>。<br />
 当我们向图表添加<code class="docutils literal notranslate"><span class="pre">Figure.add_subplot()</span></code>或者<code class="docutils literal notranslate"><span class="pre">Figure.add_axes()</span></code>元素时，这些都会被添加到<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>列表中。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -862,7 +884,6 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_29_1.png" src="../_images/index_29_1.png" />
 </div>
 </div>
-<p>​</p>
 <p>由于<code class="docutils literal notranslate"><span class="pre">Figure</span></code>维持了<code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">axes</span></code>，因此你不应该手动的从<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>列表中添加删除元素，而是要通过<code class="docutils literal notranslate"><span class="pre">Figure.add_subplot()</span></code>、<code class="docutils literal notranslate"><span class="pre">Figure.add_axes()</span></code>来添加元素，通过<code class="docutils literal notranslate"><span class="pre">Figure.delaxes()</span></code>来删除元素。但是你可以迭代或者访问<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>中的<code class="docutils literal notranslate"><span class="pre">Axes</span></code>，然后修改这个<code class="docutils literal notranslate"><span class="pre">Axes</span></code>的属性。</p>
 <p>比如下面的遍历axes里的内容，并且添加网格线：</p>
 <div class="cell docutils container">
@@ -872,7 +893,6 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 
 <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    
 </pre></div>
 </div>
 </div>
@@ -880,6 +900,8 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_31_0.png" src="../_images/index_31_0.png" />
 </div>
 </div>
+<p>​</p>
+<p>​</p>
 <p><code class="docutils literal notranslate"><span class="pre">Figure</span></code>也有它自己的<code class="docutils literal notranslate"><span class="pre">text、line、patch、image</span></code>。你可以直接通过<code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">primitive</span></code>语句直接添加。但是注意<code class="docutils literal notranslate"><span class="pre">Figure</span></code>默认的坐标系是以像素为单位，你可能需要转换成figure坐标系：(0,0)表示左下点，(1,1)表示右上点。</p>
 <p><strong>Figure容器的常见属性：</strong><br />
 <code class="docutils literal notranslate"><span class="pre">Figure.patch</span></code>属性：Figure的背景矩形<br />
@@ -895,11 +917,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <p>和<code class="docutils literal notranslate"><span class="pre">Figure</span></code>容器类似，<code class="docutils literal notranslate"><span class="pre">Axes</span></code>包含了一个patch属性，对于笛卡尔坐标系而言，它是一个<code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>；对于极坐标而言，它是一个<code class="docutils literal notranslate"><span class="pre">Circle</span></code>。这个patch属性决定了绘图区域的形状、背景和边框。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 <span class="n">rect</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">patch</span>  <span class="c1"># axes的patch是一个Rectangle实例</span>
 <span class="n">rect</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
@@ -910,6 +928,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_33_0.png" src="../_images/index_33_0.png" />
 </div>
 </div>
+<p>​</p>
 <p><code class="docutils literal notranslate"><span class="pre">Axes</span></code>有许多方法用于绘图，如<code class="docutils literal notranslate"><span class="pre">.plot()、.text()、.hist()、.imshow()</span></code>等方法用于创建大多数常见的<code class="docutils literal notranslate"><span class="pre">primitive</span></code>(如<code class="docutils literal notranslate"><span class="pre">Line2D，Rectangle，Text，Image</span></code>等等）。在<code class="docutils literal notranslate"><span class="pre">primitives</span></code>中已经涉及，不再赘述。</p>
 <p>Subplot就是一个特殊的Axes，其实例是位于网格中某个区域的Subplot实例。其实你也可以在任意区域创建Axes，通过Figure.add_axes([left,bottom,width,height])来创建一个任意区域的Axes，其中left,bottom,width,height都是[0—1]之间的浮点数，他们代表了相对于Figure的坐标。</p>
 <p>你不应该直接通过<code class="docutils literal notranslate"><span class="pre">Axes.lines</span></code>和<code class="docutils literal notranslate"><span class="pre">Axes.patches</span></code>列表来添加图表。因为当创建或添加一个对象到图表中时，<code class="docutils literal notranslate"><span class="pre">Axes</span></code>会做许多自动化的工作:<br />
@@ -921,15 +940,15 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <code class="docutils literal notranslate"><span class="pre">ax.yaxis</span></code>：YAxis对象的实例，用于处理y轴tick以及label的绘制<br />
 会在下面章节详细说明。</p>
 <p><strong>Axes容器</strong>的常见属性有：<br />
-<code class="docutils literal notranslate"><span class="pre">artists</span></code>:    Artist实例列表
-<code class="docutils literal notranslate"><span class="pre">patch</span></code>:     Axes所在的矩形实例
-<code class="docutils literal notranslate"><span class="pre">collections</span></code>: Collection实例
-<code class="docutils literal notranslate"><span class="pre">images</span></code>:    Axes图像
-<code class="docutils literal notranslate"><span class="pre">legends</span></code>:	  Legend 实例
-<code class="docutils literal notranslate"><span class="pre">lines</span></code>:	  Line2D 实例
-<code class="docutils literal notranslate"><span class="pre">patches</span></code>:	  Patch 实例
-<code class="docutils literal notranslate"><span class="pre">texts</span></code>:	  Text 实例
-<code class="docutils literal notranslate"><span class="pre">xaxis</span></code>:	  matplotlib.axis.XAxis 实例
+<code class="docutils literal notranslate"><span class="pre">artists</span></code>:    Artist实例列表<br />
+<code class="docutils literal notranslate"><span class="pre">patch</span></code>:     Axes所在的矩形实例<br />
+<code class="docutils literal notranslate"><span class="pre">collections</span></code>: Collection实例<br />
+<code class="docutils literal notranslate"><span class="pre">images</span></code>:    Axes图像<br />
+<code class="docutils literal notranslate"><span class="pre">legends</span></code>:	  Legend 实例<br />
+<code class="docutils literal notranslate"><span class="pre">lines</span></code>:	  Line2D 实例<br />
+<code class="docutils literal notranslate"><span class="pre">patches</span></code>:	  Patch 实例<br />
+<code class="docutils literal notranslate"><span class="pre">texts</span></code>:	  Text 实例<br />
+<code class="docutils literal notranslate"><span class="pre">xaxis</span></code>:	  matplotlib.axis.XAxis 实例<br />
 <code class="docutils literal notranslate"><span class="pre">yaxis</span></code>:	  matplotlib.axis.YAxis 实例</p>
 </div>
 <div class="section" id="axis">
@@ -967,6 +986,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_35_1.png" src="../_images/index_35_1.png" />
 </div>
 </div>
+<p>​</p>
 <p>下面的例子展示了如何调整一些轴和刻度的属性(忽略美观度，仅作调整参考)：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -990,8 +1010,6 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
     <span class="n">line</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>    <span class="c1"># 颜色</span>
     <span class="n">line</span><span class="o">.</span><span class="n">set_markersize</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>    <span class="c1"># marker大小</span>
     <span class="n">line</span><span class="o">.</span><span class="n">set_markeredgewidth</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1"># marker粗细</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -999,6 +1017,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <img alt="../_images/index_37_0.png" src="../_images/index_37_0.png" />
 </div>
 </div>
+<p>​</p>
 </div>
 <div class="section" id="tick">
 <h3>4. Tick容器<a class="headerlink" href="#tick" title="永久链接至标题">¶</a></h3>
@@ -1015,11 +1034,7 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
 <p>下面的例子展示了，如何将Y轴右边轴设为主轴，并将标签设置为美元符号且为绿色：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
 
 <span class="c1"># 设置ticker的显示格式</span>
@@ -1036,14 +1051,27 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
 <img alt="../_images/index_39_0.png" src="../_images/index_39_0.png" />
 </div>
 </div>
+<p>​</p>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>参考资料<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>思考题<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>primitives 和 container的区别和联系是什么，分别用于控制可视化图表中的哪些要素</p></li>
+<li><p>使用提供的drug数据集，对第一列yyyy和第二列state分组求和，画出下面折线图。PA加粗标黄，其他为灰色。<br />
+图标题和横纵坐标轴标题，以及线的文本暂不做要求。</p></li>
+</ul>
+<p><img alt="" src="https://img-blog.csdnimg.cn/20210523162430365.png" /></p>
+<ul class="simple">
+<li><p>分别用一组长方形柱和填充面积的方式模仿画出下图，函数 y = -1 * (x - 2) * (x - 8) +10 在区间[2,9]的积分面积<br />
+<img alt="" src="https://img-blog.csdnimg.cn/20201126105910781.png" /><br />
+<img alt="" src="https://img-blog.csdnimg.cn/20201126105910780.png" /></p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>参考资料<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p><a class="reference external" href="https://zhuanlan.zhihu.com/p/32693665">1. matplotlib设计的基本逻辑</a><br />
-<a class="reference external" href="https://matplotlib.org/api/artist_api.html">2. matplotlib.artist api</a><br />
-<a class="reference external" href="https://matplotlib.org/tutorials/intermediate/artists.html#sphx-glr-tutorials-intermediate-artists-py">3. matplotlib官方教程</a><br />
-<a class="reference external" href="https://www.bookstack.cn/read/huaxiaozhuan-ai/spilt.2.333f5abdbabf383d.md">4. AI算法工程师手册</a></p>
+<a class="reference external" href="https://www.bookstack.cn/read/huaxiaozhuan-ai/spilt.2.333f5abdbabf383d.md">2. AI算法工程师手册</a></p>
 </div>
 </div>
 
@@ -1064,9 +1092,9 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
     <div class="container">
       <p>
         
-          By Datawhale<br/>
+          By Datawhale数据可视化开源小组<br/>
         
-            &copy; Copyright © Copyright 2020.<br/>
+            &copy; Copyright © Copyright 2021.<br/>
       </p>
     </div>
   </footer>

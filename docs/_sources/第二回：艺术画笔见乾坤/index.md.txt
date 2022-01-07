@@ -6,8 +6,18 @@ kernelspec:
   display_name: Python 3
   name: python3
 ---
-# 第二回：艺术画笔见乾坤
+```{code-cell} ipython3
+import numpy as np
+import pandas as pd
+import re
+import matplotlib
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D   
+from matplotlib.patches import Circle, Wedge
+from matplotlib.collections import PatchCollection
+```
 
+# 第二回：艺术画笔见乾坤
 
 ## 一、概述
 
@@ -36,54 +46,39 @@ Artist有两种类型：`primitives` 和`containers`。
 `container`是容器，即用来装基本要素的地方，包括**图形figure、坐标系Axes和坐标轴Axis**。他们之间的关系如下图所示：  
 ![分类](https://img-blog.csdnimg.cn/20201122230916134.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODYwNDk2MQ==,size_16,color_FFFFFF,t_70#pic_center)  
 
-### 3. matplotlib标准用法
-matplotlib的标准使用流程为：  
-1. 创建一个`Figure`实例
-2. 使用`Figure`实例创建一个或者多个`Axes`或`Subplot`实例
-3. 使用`Axes`实例的辅助方法来创建`primitive`  
+可视化中常见的artist类可以参考下图这张表格，解释下每一列的含义。  
+第一列表示matplotlib中子图上的辅助方法，可以理解为可视化中不同种类的图表类型，如柱状图，折线图，直方图等，这些图表都可以用这些辅助方法直接画出来，属于更高层级的抽象。 
 
-值得一提的是，Axes是一种容器，它可能是matplotlib API中最重要的类，并且我们大多数时间都花在和它打交道上。更具体的信息会在第三节容器小节说明。
+第二列表示不同图表背后的artist类，比如折线图方法`plot`在底层用到的就是`Line2D`这一artist类。
 
-一个流程示例及说明如下：  
+第三列是第二列的列表容器，例如所有在子图中创建的`Line2D`对象都会被自动收集到`ax.lines`返回的列表中。 
 
+下一节的具体案例更清楚地阐释了这三者的关系，其实在很多时候，我们只用记住第一列的辅助方法进行绘图即可，而无需关注具体底层使用了哪些类，但是了解底层类有助于我们绘制一些复杂的图表，因此也很有必要了解。
 
-```{code-cell} ipython3
-import matplotlib.pyplot as plt
-import numpy as np
-
-# step 1 
-# 我们用 matplotlib.pyplot.figure() 创建了一个Figure实例
-fig = plt.figure()
-
-# step 2
-# 然后用Figure实例创建了一个两行一列(即可以有两个subplot)的绘图区，并同时在第一个位置创建了一个subplot
-ax = fig.add_subplot(2, 1, 1) # two rows, one column, first plot
-
-# step 3
-# 然后用Axes实例的方法画了一条曲线
-t = np.arange(0.0, 1.0, 0.01)
-s = np.sin(2*np.pi*t)
-line, = ax.plot(t, s, color='blue', lw=2)
-```
-
-
-
+| Axes helper method   | Artist | Container   |
+| -------------------  | ------ | ----------- |
+| `bar` - bar charts | `Rectangle` | ax.patches  |
+| `errorbar` - error bar plots | `Line2D` and `Rectangle` | ax.lines and ax.patches |
+| `fill` - shared area | `Polygon` | ax.patches   |
+| `hist` - histograms | `Rectangle` | ax.patches    |
+|`imshow` - image data | `AxesImage` | ax.images     |
+| `plot` - xy plots | `Line2D` | ax.lines        |
+| `scatter` - scatter charts | `PolyCollection` | ax.collections   |
 
 ## 二、基本元素 - primitives
 各容器中可能会包含多种`基本要素-primitives`, 所以先介绍下primitives，再介绍容器。
 
-本章重点介绍下 `primitives` 的几种类型：**曲线-Line2D，矩形-Rectangle，图像-image** （其中文本-Text较为复杂，会在之后单独详细说明。）
+本章重点介绍下 `primitives` 的几种类型：**曲线-Line2D，矩形-Rectangle，多边形-Polygon，图像-image** 
 
 
 ### 1. 2DLines
 在matplotlib中曲线的绘制，主要是通过类 `matplotlib.lines.Line2D` 来完成的。   
-它的基类: `matplotlib.artist.Artist`   
 
 matplotlib中`线-line`的含义：它表示的可以是连接所有顶点的实线样式，也可以是每个顶点的标记。此外，这条线也会受到绘画风格的影响，比如，我们可以创建虚线种类的线。
 
 它的构造函数：
 
-> class matplotlib.lines.Line2D(xdata, ydata, linewidth=None, linestyle=None, color=None, marker=None, markersize=None, markeredgewidth=None, markeredgecolor=None, markerfacecolor=None, markerfacecoloralt='none', fillstyle=None, antialiased=None, dash_capstyle=None, solid_capstyle=None, dash_joinstyle=None, solid_joinstyle=None, pickradius=5, drawstyle=None, markevery=None, **kwargs)
+>class matplotlib.lines.Line2D(xdata, ydata, linewidth=None, linestyle=None, color=None, marker=None, markersize=None, markeredgewidth=None, markeredgecolor=None, markerfacecolor=None, markerfacecoloralt='none', fillstyle=None, antialiased=None, dash_capstyle=None, solid_capstyle=None, dash_joinstyle=None, solid_joinstyle=None, pickradius=5, drawstyle=None, markevery=None, **kwargs)
 
 
 
@@ -97,7 +92,7 @@ matplotlib中`线-line`的含义：它表示的可以是连接所有顶点的实
 + **markersize**:标记的size
   
 
-其他详细参数可参考[Line2D官方文档](https://matplotlib.org/api/_as_gen/matplotlib.lines.Line2D.html#examples-using-matplotlib-lines-line2d)
+其他详细参数可参考[Line2D官方文档](https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html)
 
 #### a. 如何设置Line2D的属性
 有三种方法可以用设置线的属性。  
@@ -110,7 +105,6 @@ matplotlib中`线-line`的含义：它表示的可以是连接所有顶点的实
 
 ```{code-cell} ipython3
 # 1) 直接在plot()函数中设置
-import matplotlib.pyplot as plt
 x = range(0,5)
 y = [2,5,7,8,10]
 plt.plot(x,y, linewidth=10); # 设置线的粗细参数为10
@@ -118,20 +112,13 @@ plt.plot(x,y, linewidth=10); # 设置线的粗细参数为10
 
 
 
-
-
-
-
 ```{code-cell} ipython3
 # 2) 通过获得线对象，对线对象进行设置
 x = range(0,5)
 y = [2,5,7,8,10]
-line, = plt.plot(x, y, '-')
-line.set_antialiased(False) # 关闭抗锯齿功能
+line, = plt.plot(x, y, '-') # 这里等号坐标的line,是一个列表解包的操作，目的是获取plt.plot返回列表中的Line2D对象
+line.set_antialiased(False); # 关闭抗锯齿功能
 ```
-
-
-
 
 
 
@@ -153,42 +140,48 @@ plt.setp(lines, color='r', linewidth=10);
 
 
 
-绘制直线line常用的方法有两种:    
-+ **pyplot方法绘制**  
-+ **Line2D对象绘制**
+介绍两种绘制直线line常用的方法:    
++ **plot方法绘制**  
++ **Line2D对象绘制**  
+
+
 
 
 ```{code-cell} ipython3
-# 1. pyplot方法绘制
-import matplotlib.pyplot as plt
+# 1. plot方法绘制
 x = range(0,5)
-y = [2,5,7,8,10]
-plt.plot(x,y);
+y1 = [2,5,7,8,10]
+y2= [3,6,8,9,11]
+
+fig,ax= plt.subplots()
+ax.plot(x,y1)
+ax.plot(x,y2)
+print(ax.lines); # 通过直接使用辅助方法画线，打印ax.lines后可以看到在matplotlib在底层创建了两个Line2D对象
 ```
 
+  
 
-
-
+    
 
 
 
 ```{code-cell} ipython3
 # 2. Line2D对象绘制
-import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D      
 
-fig = plt.figure()
-ax = fig.add_subplot(111)
-line = Line2D(x, y)
-ax.add_line(line)
-ax.set_xlim(min(x), max(x))
-ax.set_ylim(min(y), max(y))
-
-plt.show()
+x = range(0,5)
+y1 = [2,5,7,8,10]
+y2= [3,6,8,9,11]
+fig,ax= plt.subplots()
+lines = [Line2D(x, y1), Line2D(x, y2,color='orange')]  # 显式创建Line2D对象
+for line in lines:
+    ax.add_line(line) # 使用add_line方法将创建的Line2D添加到子图中
+ax.set_xlim(0,4)
+ax.set_ylim(2, 11);
 ```
 
 
-
+​    
+​    
 
 
 **2) errorbar绘制误差折线图**  
@@ -210,32 +203,28 @@ pyplot里有个专门绘制误差线的功能，通过`errorbar`类实现，它�
 
 
 ```{code-cell} ipython3
-import numpy as np
-import matplotlib.pyplot as plt
 fig = plt.figure()
 x = np.arange(10)
 y = 2.5 * np.sin(x / 20 * np.pi)
 yerr = np.linspace(0.05, 0.2, 10)
 plt.errorbar(x, y + 3, yerr=yerr, label='both limits (default)');
-
 ```
 
 
-
-
-
+​    
+​    
 
 
 ### 2. patches
-matplotlib.patches.Patch类是二维图形类。它的基类是matplotlib.artist.Artist，它的构造函数：  
-详细清单见 [matplotlib.patches API](https://matplotlib.org/api/patches_api.html)  
+matplotlib.patches.Patch类是二维图形类，并且它是众多二维图形的父类，它的所有子类见[matplotlib.patches API](https://matplotlib.org/stable/api/patches_api.html)  ，  
+Patch类的构造函数：  
 
-  
-
-> Patch(edgecolor=None, facecolor=None, color=None,
+>Patch(edgecolor=None, facecolor=None, color=None,
   linewidth=None, linestyle=None, antialiased=None,
   hatch=None, fill=True, capstyle=None, joinstyle=None,
-  **kwargs)
+  **kwargs)  
+
+本小节重点讲述三种最常见的子类，矩形，多边形和楔型。
 
 
 #### a. Rectangle-矩形
@@ -244,7 +233,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 
 > class matplotlib.patches.Rectangle(xy, width, height, angle=0.0, **kwargs)
 
-在实际中最常见的矩形图是**`hist直方图`和`bar条形图`**。  
+在实际中最常见的矩形图是`hist直方图`和`bar条形图`。  
 
   
 
@@ -266,27 +255,23 @@ hist绘制直方图
 
 
 ```{code-cell} ipython3
-import matplotlib.pyplot as plt
-import numpy as np 
 x=np.random.randint(0,100,100) #生成[0-100)之间的100个数据,即 数据集 
 bins=np.arange(0,101,10) #设置连续的边界值，即直方图的分布区间[0,10),[10,20)... 
 plt.hist(x,bins,color='fuchsia',alpha=0.5)#alpha设置透明度，0为完全透明 
 plt.xlabel('scores') 
 plt.ylabel('count') 
-plt.xlim(0,100)#设置x轴分布范围 
-plt.show()
+plt.xlim(0,100); #设置x轴分布范围 plt.show()
 ```
 
 
 
+​    
 
 
 `Rectangle`矩形类绘制直方图
 
 
 ```{code-cell} ipython3
-import pandas as pd
-import re
 df = pd.DataFrame(columns = ['data'])
 df.loc[:,'data'] = x
 df['fenzu'] = pd.cut(df['data'], bins=bins, right = False,include_lowest=True)
@@ -299,7 +284,6 @@ df_cnt.sort_values('mini',ascending = True,inplace = True)
 df_cnt.reset_index(inplace = True,drop = True)
 
 #用Rectangle把hist绘制出来
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -309,17 +293,18 @@ for i in df_cnt.index:
     ax1.add_patch(rect)
 
 ax1.set_xlim(0, 100)
-ax1.set_ylim(0, 16)
-plt.show()
+ax1.set_ylim(0, 16);
 ```
 
 
+​    
 
+​    
 
 
 **2) bar-柱状图**   
 
-> matplotlib.pyplot.bar(left, height, alpha=1, width=0.8, color=, edgecolor=, label=, lw=3)
+>matplotlib.pyplot.bar(left, height, alpha=1, width=0.8, color=, edgecolor=, label=, lw=3)
 
 下面是一些常用的参数：    
 + **left**：x轴的位置序列，一般采用range函数产生一个序列，但是有时候可以是字符串  
@@ -339,23 +324,18 @@ plt.show()
 
 ```{code-cell} ipython3
 # bar绘制柱状图
-import matplotlib.pyplot as plt
 y = range(1,17)
 plt.bar(np.arange(16), y, alpha=0.5, width=0.5, color='yellow', edgecolor='red', label='The First Bar', lw=3);
 ```
 
 
-
-
-
-
+​    
 
 
 
 
 ```{code-cell} ipython3
 # Rectangle矩形类绘制柱状图
-#import matplotlib.pyplot as plt
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
 
@@ -363,17 +343,19 @@ for i in range(1,17):
     rect =  plt.Rectangle((i+0.25,0),0.5,i)
     ax1.add_patch(rect)
 ax1.set_xlim(0, 16)
-ax1.set_ylim(0, 16)
-plt.show()
+ax1.set_ylim(0, 16);
 ```
 
 
+​    
+
+​    
 
 
 #### b. Polygon-多边形
-matplotlib.patches.Polygon类是多边形类。其基类是matplotlib.patches.Patch，它的构造函数：
+matplotlib.patches.Polygon类是多边形类。它的构造函数：
 
-> class matplotlib.patches.Polygon(xy, closed=True, **kwargs)  
+>class matplotlib.patches.Polygon(xy, closed=True, **kwargs)  
 
 xy是一个N×2的numpy array，为多边形的顶点。  
 closed为True则指定多边形将起点和终点重合从而显式关闭多边形。  
@@ -381,14 +363,13 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 
 matplotlib.patches.Polygon类中常用的是fill类，它是基于xy绘制一个填充的多边形，它的定义：
 
-> matplotlib.pyplot.fill(*args, data=None, **kwargs)
+>matplotlib.pyplot.fill(*args, data=None, **kwargs)
 
 参数说明 : 关于x、y和color的序列，其中color是可选的参数，每个多边形都是由其节点的x和y位置列表定义的，后面可以选择一个颜色说明符。您可以通过提供多个x、y、[颜色]组来绘制多个多边形。
 
 
 ```{code-cell} ipython3
 # 用fill来绘制图形
-import matplotlib.pyplot as plt
 x = np.linspace(0, 5 * np.pi, 1000) 
 y1 = np.sin(x)
 y2 = np.sin(2 * x) 
@@ -396,22 +377,22 @@ plt.fill(x, y1, color = "g", alpha = 0.3);
 ```
 
 
+​    
 
-
-
+​    
 
 
 #### c. Wedge-契形
 matplotlib.patches.Polygon类是多边形类。其基类是matplotlib.patches.Patch，它的构造函数：
 
-> class matplotlib.patches.Wedge(center, r, theta1, theta2, width=None, **kwargs)  
+>class matplotlib.patches.Wedge(center, r, theta1, theta2, width=None, **kwargs)  
 
 一个Wedge-契形 是以坐标x,y为中心，半径为r，从θ1扫到θ2(单位是度)。  
 如果宽度给定，则从内半径r -宽度到外半径r画出部分楔形。wedge中比较常见的是绘制饼状图。  
 
 
 matplotlib.pyplot.pie语法：  
-> matplotlib.pyplot.pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, shadow=False, labeldistance=1.1, startangle=0, radius=1, counterclock=True, wedgeprops=None, textprops=None, center=0, 0, frame=False, rotatelabels=False, *, normalize=None, data=None)
+>matplotlib.pyplot.pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, shadow=False, labeldistance=1.1, startangle=0, radius=1, counterclock=True, wedgeprops=None, textprops=None, center=0, 0, frame=False, rotatelabels=False, *, normalize=None, data=None)
 
 制作数据x的饼图，每个楔子的面积用x/sum(x)表示。    
 其中最主要的参数是前4个：  
@@ -425,52 +406,51 @@ pie绘制饼状图
 
 
 ```{code-cell} ipython3
-import matplotlib.pyplot as plt 
 labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
 sizes = [15, 30, 45, 10] 
 explode = (0, 0.1, 0, 0) 
 fig1, ax1 = plt.subplots() 
 ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90) 
-ax1.axis('equal') # Equal aspect ratio ensures that pie is drawn as a circle. 
-plt.show()
+ax1.axis('equal'); # Equal aspect ratio ensures that pie is drawn as a circle. 
 ```
 
 
+​    
+
+​    
 
 
 wedge绘制饼图
 
 
 ```{code-cell} ipython3
-import matplotlib.pyplot as plt 
-from matplotlib.patches import Circle, Wedge
-from matplotlib.collections import PatchCollection
-
-fig = plt.figure()
+fig = plt.figure(figsize=(5,5))
 ax1 = fig.add_subplot(111)
 theta1 = 0
 sizes = [15, 30, 45, 10] 
 patches = []
 patches += [
-    Wedge((0.3, 0.3), .2, 0, 54),             # Full circle
-    Wedge((0.3, 0.3), .2, 54, 162),  # Full ring
-    Wedge((0.3, 0.3), .2, 162, 324),              # Full sector
-    Wedge((0.3, 0.3), .2, 324, 360),  # Ring sector
+    Wedge((0.5, 0.5), .4, 0, 54),           
+    Wedge((0.5, 0.5), .4, 54, 162),  
+    Wedge((0.5, 0.5), .4, 162, 324),           
+    Wedge((0.5, 0.5), .4, 324, 360),  
 ]
 colors = 100 * np.random.rand(len(patches))
-p = PatchCollection(patches, alpha=0.4)
+p = PatchCollection(patches, alpha=0.8)
 p.set_array(colors)
-ax1.add_collection(p)
-plt.show()
+ax1.add_collection(p);
 ```
 
 
+​    
+
+​    
 
 
 ### 3. collections
 collections类是用来绘制一组对象的集合，collections有许多不同的子类，如RegularPolyCollection, CircleCollection, Pathcollection, 分别对应不同的集合子类型。其中比较常用的就是散点图，它是属于PathCollection子类，scatter方法提供了该类的封装，根据x与y绘制不同大小或颜色标记的散点图。 它的构造方法：
 
-> Axes.scatter(self, x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, verts=<deprecated parameter>, edgecolors=None, *, plotnonfinite=False, data=None, **kwargs)
+>Axes.scatter(self, x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, verts=<deprecated parameter>, edgecolors=None, *, plotnonfinite=False, data=None, **kwargs)
 
 
 其中最主要的参数是前5个：  
@@ -487,27 +467,26 @@ collections类是用来绘制一组对象的集合，collections有许多不同�
 x = [0,2,4,6,8,10] 
 y = [10]*len(x) 
 s = [20*2**n for n in range(len(x))] 
-plt.scatter(x,y,s=s) 
-plt.show()
+plt.scatter(x,y,s=s) ;
 ```
 
 
+​    
 
+​    
 
 
 ### 4. images
 images是matplotlib中绘制image图像的类，其中最常用的imshow可以根据数组绘制成图像，它的构造函数：
-> class matplotlib.image.AxesImage(ax, cmap=None, norm=None, interpolation=None, origin=None, extent=None, filternorm=True, filterrad=4.0, resample=False, **kwargs)
+>class matplotlib.image.AxesImage(ax, cmap=None, norm=None, interpolation=None, origin=None, extent=None, filternorm=True, filterrad=4.0, resample=False, **kwargs)
 
 imshow根据数组绘制图像
-> matplotlib.pyplot.imshow(X, cmap=None, norm=None, aspect=None, interpolation=None, alpha=None, vmin=None, vmax=None, origin=None, extent=None, shape=<deprecated parameter>, filternorm=1, filterrad=4.0, imlim=<deprecated parameter>, resample=None, url=None, *, data=None, **kwargs）
+>matplotlib.pyplot.imshow(X, cmap=None, norm=None, aspect=None, interpolation=None, alpha=None, vmin=None, vmax=None, origin=None, extent=None, shape=<deprecated parameter>, filternorm=1, filterrad=4.0, imlim=<deprecated parameter>, resample=None, url=None, *, data=None, **kwargs）
 
 使用imshow画图时首先需要传入一个数组，数组对应的是空间内的像素位置和像素点的值，interpolation参数可以设置不同的差值方法，具体效果如下。
 
 
 ```{code-cell} ipython3
-import matplotlib.pyplot as plt
-import numpy as np
 methods = [None, 'none', 'nearest', 'bilinear', 'bicubic', 'spline16',
            'spline36', 'hanning', 'hamming', 'hermite', 'kaiser', 'quadric',
            'catrom', 'gaussian', 'bessel', 'mitchell', 'sinc', 'lanczos']
@@ -522,12 +501,13 @@ for ax, interp_method in zip(axs.flat, methods):
     ax.imshow(grid, interpolation=interp_method, cmap='viridis')
     ax.set_title(str(interp_method))
 
-plt.tight_layout()
-plt.show()
+plt.tight_layout();
 ```
 
 
+​    
 
+​    
 
 
 ## 三、对象容器 - Object container
@@ -535,7 +515,7 @@ plt.show()
 比如`Axes Artist`，它是一种容器，它包含了很多`primitives`，比如`Line2D`，`Text`；同时，它也有自身的属性，比如`xscal`，用来控制X轴是`linear`还是`log`的。  
 
 ### 1. Figure容器
-`matplotlib.figure.Figure`是`Artist`最顶层的`container`-对象容器，它包含了图表中的所有元素。一张图表的背景就是在`Figure.patch`的一个矩形`Rectangle`。  
+`matplotlib.figure.Figure`是`Artist`最顶层的`container`对象容器，它包含了图表中的所有元素。一张图表的背景就是在`Figure.patch`的一个矩形`Rectangle`。  
 当我们向图表添加`Figure.add_subplot()`或者`Figure.add_axes()`元素时，这些都会被添加到`Figure.axes`列表中。
 
 
@@ -547,8 +527,11 @@ print(ax1)
 print(fig.axes) # fig.axes 中包含了subplot和axes两个实例, 刚刚添加的
 ```
 
+   
 
-​    
+
+
+    
 
 
 由于`Figure`维持了`current axes`，因此你不应该手动的从`Figure.axes`列表中添加删除元素，而是要通过`Figure.add_subplot()`、`Figure.add_axes()`来添加元素，通过`Figure.delaxes()`来删除元素。但是你可以迭代或者访问`Figure.axes`中的`Axes`，然后修改这个`Axes`的属性。   
@@ -562,12 +545,13 @@ ax1 = fig.add_subplot(211)
 
 for ax in fig.axes:
     ax.grid(True)
-    
 
 ```
 
 
+​    
 
+​    
 
 
 `Figure`也有它自己的`text、line、patch、image`。你可以直接通过`add primitive`语句直接添加。但是注意`Figure`默认的坐标系是以像素为单位，你可能需要转换成figure坐标系：(0,0)表示左下点，(1,1)表示右上点。
@@ -588,16 +572,15 @@ for ax in fig.axes:
 
 
 ```{code-cell} ipython3
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-
 fig = plt.figure()
 ax = fig.add_subplot(111)
 rect = ax.patch  # axes的patch是一个Rectangle实例
 rect.set_facecolor('green')
 ```
 
+
+
+​    
 
 
 `Axes`有许多方法用于绘图，如`.plot()、.text()、.hist()、.imshow()`等方法用于创建大多数常见的`primitive`(如`Line2D，Rectangle，Text，Image`等等）。在`primitives`中已经涉及，不再赘述。   
@@ -617,16 +600,16 @@ Subplot就是一个特殊的Axes，其实例是位于网格中某个区域的Sub
 会在下面章节详细说明。
 
 **Axes容器**的常见属性有：  
-`artists`:    Artist实例列表
-`patch`:     Axes所在的矩形实例
-`collections`: Collection实例
-`images`:    Axes图像
-`legends`:	  Legend 实例
-`lines`:	  Line2D 实例
-`patches`:	  Patch 实例
-`texts`:	  Text 实例
-`xaxis`:	  matplotlib.axis.XAxis 实例
-`yaxis`:	  matplotlib.axis.YAxis 实例
+`artists`:    Artist实例列表  
+`patch`:     Axes所在的矩形实例  
+`collections`: Collection实例  
+`images`:    Axes图像  
+`legends`:	  Legend 实例  
+`lines`:	  Line2D 实例  
+`patches`:	  Patch 实例  
+`texts`:	  Text 实例  
+`xaxis`:	  matplotlib.axis.XAxis 实例  
+`yaxis`:	  matplotlib.axis.YAxis 实例  
 
 ### 3. Axis容器
 
@@ -663,11 +646,7 @@ axis.get_view_interval()# 获取轴视角（位置）的间隔
 
 
 
-
-
-
-
-
+​    
 
 
 下面的例子展示了如何调整一些轴和刻度的属性(忽略美观度，仅作调整参考)：  
@@ -694,11 +673,11 @@ for line in ax1.yaxis.get_ticklines():
     line.set_color('green')    # 颜色
     line.set_markersize(25)    # marker大小
     line.set_markeredgewidth(2)# marker粗细
-
-plt.show()
 ```
 
 
+
+​    
 
 
 ### 4. Tick容器
@@ -720,10 +699,6 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
 
 
 ```{code-cell} ipython3
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-
 fig, ax = plt.subplots()
 ax.plot(100*np.random.rand(20))
 
@@ -734,27 +709,36 @@ ax.yaxis.set_major_formatter(formatter)
 # 设置ticker的参数，右侧为主轴，颜色为绿色
 ax.yaxis.set_tick_params(which='major', labelcolor='green',
                          labelleft=False, labelright=True);
-
-
 ```
 
 
 
+​    
+
+
+## 思考题
+
+- primitives 和 container的区别和联系是什么，分别用于控制可视化图表中的哪些要素
+
+- 使用提供的drug数据集，对第一列yyyy和第二列state分组求和，画出下面折线图。PA加粗标黄，其他为灰色。    
+图标题和横纵坐标轴标题，以及线的文本暂不做要求。  
+  
+
+![](https://img-blog.csdnimg.cn/20210523162430365.png)
 
 
 
 
-
-
-
-
-
+- 分别用一组长方形柱和填充面积的方式模仿画出下图，函数 y = -1 * (x - 2) * (x - 8) +10 在区间[2,9]的积分面积  
+![](https://img-blog.csdnimg.cn/20201126105910781.png)  
+![](https://img-blog.csdnimg.cn/20201126105910780.png)  
 
 ## 参考资料
 [1. matplotlib设计的基本逻辑](https://zhuanlan.zhihu.com/p/32693665)  
-[2. matplotlib.artist api](https://matplotlib.org/api/artist_api.html)  
-[3. matplotlib官方教程](https://matplotlib.org/tutorials/intermediate/artists.html#sphx-glr-tutorials-intermediate-artists-py)  
-[4. AI算法工程师手册](https://www.bookstack.cn/read/huaxiaozhuan-ai/spilt.2.333f5abdbabf383d.md)  
+[2. AI算法工程师手册](https://www.bookstack.cn/read/huaxiaozhuan-ai/spilt.2.333f5abdbabf383d.md)  
 
 
+```{code-cell} ipython3
+
+```
 
