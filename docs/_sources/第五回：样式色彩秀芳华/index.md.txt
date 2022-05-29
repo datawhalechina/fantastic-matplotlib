@@ -7,7 +7,11 @@ kernelspec:
   name: python3
 ---
 # 第五回：样式色彩秀芳华
-
+```{code-cell} ipython3
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+```
 
 第五回详细介绍matplotlib中样式和颜色的使用，绘图样式和颜色是丰富可视化图表的重要手段，因此熟练掌握本章可以让可视化图表变得更美观，突出重点和凸显艺术性。  
 关于绘图样式，常见的有3种方法，分别是修改预定义样式，自定义样式和rcparams。  
@@ -23,11 +27,7 @@ kernelspec:
 matplotlib贴心地提供了许多内置的样式供用户使用，使用方法很简单，只需在python脚本的最开始输入想使用style的名称即可调用，尝试调用不同内置样式，比较区别
 
 
-```{code-cell} ipython3
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
-```
+
 
 
 ```{code-cell} ipython3
@@ -125,7 +125,7 @@ plt.plot([1,2,3,4],[2,3,4,5]);
 
 
 
-另外matplotlib也还提供了了一种更便捷的修改样式方式，可以一次性修改多个样式。
+另外matplotlib也还提供了一种更便捷的修改样式方式，可以一次性修改多个样式。
 
 
 ```{code-cell} ipython3
@@ -142,7 +142,6 @@ plt.plot([1,2,3,4],[2,3,4,5]);
 `色相`： 没有明显的顺序性、一般不用来表达数据量的高低，而是用来表达数据列的类别。  
 `明度和饱和度`： 在视觉上很容易区分出优先级的高低、被用作表达顺序或者表达数据量视觉通道。  
 具体关于色彩理论部分的知识，不属于本教程的重点，请参阅有关拓展材料学习。  
-[ECharts数据可视化实验室](https://vis.baidu.com/chartcolor/basis/)  
 [学会这6个可视化配色基本技巧，还原数据本身的意义](https://zhuanlan.zhihu.com/p/88892542)
 
 在matplotlib中，设置颜色有以下几种方式：

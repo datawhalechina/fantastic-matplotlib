@@ -32,7 +32,7 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 
 - 使用前请将matplotlib升级至V3.4.2以上(2022年1月)，否则可能会出现报错！
 - 本教程独立网站已上线：[https://datawhalechina.github.io/fantastic-matplotlib/](https://datawhalechina.github.io/fantastic-matplotlib/)
-- 使用时若发现任何问题，或是你对项目内容有好的建议，欢迎留言交流，联系邮箱skywateryang@126.com
+- 使用时若发现任何问题，或是你对项目内容有好的建议，欢迎留言交流，联系邮箱skywateryang@126.com，微信`skywateryang`
 
 
 ## 目录
@@ -56,6 +56,8 @@ Matplotlib可以说是python数据可视化最重要且常见的工具之一，�
 * 第五回：样式色彩秀芳华
 
 > 下一步你需要学习下怎么样绘制出更加花样繁复，色彩绚丽的画了
+
+
 
 
 

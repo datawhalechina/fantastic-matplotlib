@@ -6,6 +6,9 @@ kernelspec:
   display_name: Python 3
   name: python3
 ---
+
+
+# 第二回：艺术画笔见乾坤
 ```{code-cell} ipython3
 import numpy as np
 import pandas as pd
@@ -16,9 +19,6 @@ from matplotlib.lines import Line2D
 from matplotlib.patches import Circle, Wedge
 from matplotlib.collections import PatchCollection
 ```
-
-# 第二回：艺术画笔见乾坤
-
 ## 一、概述
 
 ### 1. matplotlib的三层api
@@ -224,7 +224,7 @@ Patch类的构造函数：
   hatch=None, fill=True, capstyle=None, joinstyle=None,
   **kwargs)  
 
-本小节重点讲述三种最常见的子类，矩形，多边形和楔型。
+本小节重点讲述三种最常见的子类，矩形，多边形和楔形。
 
 
 #### a. Rectangle-矩形
@@ -251,10 +251,11 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 + **log**: bool，默认False,即y坐标轴是否选择指数刻度
 + **stacked**: bool，默认为False，是否为堆积状图
 
-hist绘制直方图
+
 
 
 ```{code-cell} ipython3
+# hist绘制直方图
 x=np.random.randint(0,100,100) #生成[0-100)之间的100个数据,即 数据集 
 bins=np.arange(0,101,10) #设置连续的边界值，即直方图的分布区间[0,10),[10,20)... 
 plt.hist(x,bins,color='fuchsia',alpha=0.5)#alpha设置透明度，0为完全透明 
@@ -268,10 +269,11 @@ plt.xlim(0,100); #设置x轴分布范围 plt.show()
 ​    
 
 
-`Rectangle`矩形类绘制直方图
+
 
 
 ```{code-cell} ipython3
+# Rectangle矩形类绘制直方图
 df = pd.DataFrame(columns = ['data'])
 df.loc[:,'data'] = x
 df['fenzu'] = pd.cut(df['data'], bins=bins, right = False,include_lowest=True)
@@ -402,10 +404,11 @@ matplotlib.pyplot.pie语法：
 + **colors**：饼图循环使用的颜色序列。如果取值为None，将使用当前活动循环中的颜色。  
 + **startangle**：饼状图开始的绘制的角度。   
 
-pie绘制饼状图
+
 
 
 ```{code-cell} ipython3
+# pie绘制饼状图
 labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
 sizes = [15, 30, 45, 10] 
 explode = (0, 0.1, 0, 0) 
@@ -420,10 +423,11 @@ ax1.axis('equal'); # Equal aspect ratio ensures that pie is drawn as a circle.
 ​    
 
 
-wedge绘制饼图
+
 
 
 ```{code-cell} ipython3
+# wedge绘制饼图
 fig = plt.figure(figsize=(5,5))
 ax1 = fig.add_subplot(111)
 theta1 = 0

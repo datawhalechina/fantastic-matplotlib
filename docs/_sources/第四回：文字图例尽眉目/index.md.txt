@@ -368,7 +368,7 @@ ax.xaxis.set_major_formatter(formatoddticks);
 
 
 在普通的绘图中，我们可以直接通过上图的set_ticks进行设置刻度的位置，缺点是需要自己指定或者接受matplotlib默认给定的刻度。当需要更改刻度的位置时，matplotlib给了常用的几种locator的类型。如果要绘制更复杂的图，可以先设置locator的类型，然后通过axs.xaxis.set_major_locator(locator)绘制即可  
-locator=plt.MaxNLocator(nbins=7)  
+locator=plt.MaxNLocator(nbins=7)#自动选择合适的位置，并且刻度之间最多不超过7（nbins）个间隔
 locator=plt.FixedLocator(locs=[0,0.5,1.5,2.5,3.5,4.5,5.5,6])#直接指定刻度所在的位置  
 locator=plt.AutoLocator()#自动分配刻度值的位置  
 locator=plt.IndexLocator(offset=0.5, base=1)#面元间距是1，从0.5开始  
@@ -385,7 +385,7 @@ for n, ax in enumerate(axs.flat):
 locator = matplotlib.ticker.AutoLocator()
 axs[0, 0].xaxis.set_major_locator(locator)
 
-locator = matplotlib.ticker.MaxNLocator(nbins=10)
+locator = matplotlib.ticker.MaxNLocator(nbins=3)
 axs[0, 1].xaxis.set_major_locator(locator)
 
 

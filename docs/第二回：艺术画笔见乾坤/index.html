@@ -307,7 +307,9 @@
         
               <div>
                 
-  <div class="cell docutils container">
+  <div class="section" id="id1">
+<h1>第二回：艺术画笔见乾坤<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -321,8 +323,6 @@
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h1>第二回：艺术画笔见乾坤<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id2">
 <h2>一、概述<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <div class="section" id="matplotlibapi">
@@ -432,7 +432,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_2_01.png" src="../_images/index_2_01.png" />
+<img alt="../_images/index_3_01.png" src="../_images/index_3_01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -446,7 +446,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_3_01.png" src="../_images/index_3_01.png" />
+<img alt="../_images/index_4_01.png" src="../_images/index_4_01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -460,7 +460,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_4_01.png" src="../_images/index_4_01.png" />
+<img alt="../_images/index_5_01.png" src="../_images/index_5_01.png" />
 </div>
 </div>
 </div>
@@ -490,10 +490,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x00000298AE900A30&gt;, &lt;matplotlib.lines.Line2D object at 0x00000298AE900DC0&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x0000029FF51E0A90&gt;, &lt;matplotlib.lines.Line2D object at 0x0000029FF51E0E20&gt;]
 </pre></div>
 </div>
-<img alt="../_images/index_6_1.png" src="../_images/index_6_1.png" />
+<img alt="../_images/index_7_1.png" src="../_images/index_7_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -513,7 +513,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_7_01.png" src="../_images/index_7_01.png" />
+<img alt="../_images/index_8_01.png" src="../_images/index_8_01.png" />
 </div>
 </div>
 <p>​<br />
@@ -545,7 +545,7 @@ pyplot里有个专门绘制误差线的功能，通过<code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_9_01.png" src="../_images/index_9_01.png" />
+<img alt="../_images/index_10_01.png" src="../_images/index_10_01.png" />
 </div>
 </div>
 <p>​<br />
@@ -562,7 +562,7 @@ linewidth=None, linestyle=None, antialiased=None,
 hatch=None, fill=True, capstyle=None, joinstyle=None,
 **kwargs)</p>
 </div></blockquote>
-<p>本小节重点讲述三种最常见的子类，矩形，多边形和楔型。</p>
+<p>本小节重点讲述三种最常见的子类，矩形，多边形和楔形。</p>
 <div class="section" id="a-rectangle">
 <h4>a. Rectangle-矩形<a class="headerlink" href="#a-rectangle" title="永久链接至标题">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>矩形类在官网中的定义是： 通过锚点xy及其宽度和高度生成。
@@ -586,10 +586,10 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 <li><p><strong>log</strong>: bool，默认False,即y坐标轴是否选择指数刻度</p></li>
 <li><p><strong>stacked</strong>: bool，默认为False，是否为堆积状图</p></li>
 </ul>
-<p>hist绘制直方图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#生成[0-100)之间的100个数据,即 数据集 </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hist绘制直方图</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#生成[0-100)之间的100个数据,即 数据集 </span>
 <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#设置连续的边界值，即直方图的分布区间[0,10),[10,20)... </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;fuchsia&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="c1">#alpha设置透明度，0为完全透明 </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">)</span> 
@@ -599,14 +599,14 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_11_01.png" src="../_images/index_11_01.png" />
+<img alt="../_images/index_12_0.png" src="../_images/index_12_0.png" />
 </div>
 </div>
 <p>​</p>
-<p><code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>矩形类绘制直方图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rectangle矩形类绘制直方图</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fenzu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -632,7 +632,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_13_01.png" src="../_images/index_13_01.png" />
+<img alt="../_images/index_14_0.png" src="../_images/index_14_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -665,7 +665,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_15_01.png" src="../_images/index_15_01.png" />
+<img alt="../_images/index_16_0.png" src="../_images/index_16_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -684,7 +684,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
+<img alt="../_images/index_18_0.png" src="../_images/index_18_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -714,7 +714,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_19_0.png" src="../_images/index_19_0.png" />
+<img alt="../_images/index_20_0.png" src="../_images/index_20_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -741,10 +741,10 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <li><p><strong>colors</strong>：饼图循环使用的颜色序列。如果取值为None，将使用当前活动循环中的颜色。</p></li>
 <li><p><strong>startangle</strong>：饼状图开始的绘制的角度。</p></li>
 </ul>
-<p>pie绘制饼状图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="s1">&#39;Frogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Logs&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pie绘制饼状图</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="s1">&#39;Frogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;Logs&#39;</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
 <span class="n">explode</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
 <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span> 
@@ -754,15 +754,15 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_21_0.png" src="../_images/index_21_0.png" />
+<img alt="../_images/index_22_0.png" src="../_images/index_22_0.png" />
 </div>
 </div>
 <p>​</p>
 <p>​</p>
-<p>wedge绘制饼图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wedge绘制饼图</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 <span class="n">theta1</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
@@ -781,7 +781,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_23_0.png" src="../_images/index_23_0.png" />
+<img alt="../_images/index_24_0.png" src="../_images/index_24_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -813,7 +813,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_25_0.png" src="../_images/index_25_0.png" />
+<img alt="../_images/index_26_0.png" src="../_images/index_26_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -851,7 +851,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_27_0.png" src="../_images/index_27_0.png" />
+<img alt="../_images/index_28_0.png" src="../_images/index_28_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -881,7 +881,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 [&lt;AxesSubplot:&gt;, &lt;Axes:&gt;]
 </pre></div>
 </div>
-<img alt="../_images/index_29_1.png" src="../_images/index_29_1.png" />
+<img alt="../_images/index_30_1.png" src="../_images/index_30_1.png" />
 </div>
 </div>
 <p>由于<code class="docutils literal notranslate"><span class="pre">Figure</span></code>维持了<code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">axes</span></code>，因此你不应该手动的从<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>列表中添加删除元素，而是要通过<code class="docutils literal notranslate"><span class="pre">Figure.add_subplot()</span></code>、<code class="docutils literal notranslate"><span class="pre">Figure.add_axes()</span></code>来添加元素，通过<code class="docutils literal notranslate"><span class="pre">Figure.delaxes()</span></code>来删除元素。但是你可以迭代或者访问<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>中的<code class="docutils literal notranslate"><span class="pre">Axes</span></code>，然后修改这个<code class="docutils literal notranslate"><span class="pre">Axes</span></code>的属性。</p>
@@ -897,7 +897,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_31_0.png" src="../_images/index_31_0.png" />
+<img alt="../_images/index_32_0.png" src="../_images/index_32_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -925,7 +925,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_33_0.png" src="../_images/index_33_0.png" />
+<img alt="../_images/index_34_0.png" src="../_images/index_34_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -983,7 +983,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.2,  4.2])
 </pre></div>
 </div>
-<img alt="../_images/index_35_1.png" src="../_images/index_35_1.png" />
+<img alt="../_images/index_36_1.png" src="../_images/index_36_1.png" />
 </div>
 </div>
 <p>​</p>
@@ -1014,7 +1014,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_37_0.png" src="../_images/index_37_0.png" />
+<img alt="../_images/index_38_0.png" src="../_images/index_38_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -1048,7 +1048,7 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_39_0.png" src="../_images/index_39_0.png" />
+<img alt="../_images/index_40_0.png" src="../_images/index_40_0.png" />
 </div>
 </div>
 <p>​</p>

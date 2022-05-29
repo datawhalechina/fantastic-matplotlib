@@ -391,7 +391,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_5_01.png" src="../_images/index_5_01.png" />
+<img alt="../_images/index_5_02.png" src="../_images/index_5_02.png" />
 </div>
 </div>
 <p>​</p>
@@ -467,7 +467,7 @@ ylabel方式类似，这里不重复写出。<br />
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_7_03.png" src="../_images/index_7_03.png" />
+<img alt="../_images/index_7_01.png" src="../_images/index_7_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -493,7 +493,7 @@ ylabel方式类似，这里不重复写出。<br />
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_9_03.png" src="../_images/index_9_03.png" />
+<img alt="../_images/index_9_01.png" src="../_images/index_9_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -523,7 +523,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_11_03.png" src="../_images/index_11_03.png" />
+<img alt="../_images/index_11_01.png" src="../_images/index_11_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -589,7 +589,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_17_03.png" src="../_images/index_17_03.png" />
+<img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -608,7 +608,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_19_02.png" src="../_images/index_19_02.png" />
+<img alt="../_images/index_19_0.png" src="../_images/index_19_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -668,7 +668,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_23_02.png" src="../_images/index_23_02.png" />
+<img alt="../_images/index_23_0.png" src="../_images/index_23_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -689,7 +689,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_25_02.png" src="../_images/index_25_02.png" />
+<img alt="../_images/index_25_0.png" src="../_images/index_25_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -698,7 +698,7 @@ annotate的参数非常复杂，这里仅仅展示一个简单的例子，更多
 <div class="section" id="b-tick-locators">
 <h4>b) Tick Locators<a class="headerlink" href="#b-tick-locators" title="永久链接至标题">¶</a></h4>
 <p>在普通的绘图中，我们可以直接通过上图的set_ticks进行设置刻度的位置，缺点是需要自己指定或者接受matplotlib默认给定的刻度。当需要更改刻度的位置时，matplotlib给了常用的几种locator的类型。如果要绘制更复杂的图，可以先设置locator的类型，然后通过axs.xaxis.set_major_locator(locator)绘制即可<br />
-locator=plt.MaxNLocator(nbins=7)<br />
+locator=plt.MaxNLocator(nbins=7)#自动选择合适的位置，并且刻度之间最多不超过7（nbins）个间隔
 locator=plt.FixedLocator(locs=[0,0.5,1.5,2.5,3.5,4.5,5.5,6])#直接指定刻度所在的位置<br />
 locator=plt.AutoLocator()#自动分配刻度值的位置<br />
 locator=plt.IndexLocator(offset=0.5, base=1)#面元间距是1，从0.5开始<br />
@@ -714,7 +714,7 @@ locator=plt.LinearLocator(numticks=5)#线性划分5等分，4个刻度</p>
 <span class="n">locator</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">AutoLocator</span><span class="p">()</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
 
-<span class="n">locator</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">locator</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
 
 
@@ -728,7 +728,7 @@ locator=plt.LinearLocator(numticks=5)#线性划分5等分，4个刻度</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_27_02.png" src="../_images/index_27_02.png" />
+<img alt="../_images/index_27_0.png" src="../_images/index_27_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -784,7 +784,7 @@ locator=plt.LinearLocator(numticks=5)#线性划分5等分，4个刻度</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_31_01.png" src="../_images/index_31_01.png" />
+<img alt="../_images/index_31_0.png" src="../_images/index_31_0.png" />
 </div>
 </div>
 <p>legend其他常用的几个参数如下：</p>
@@ -844,7 +844,7 @@ ax.legend(loc='upper center') 等同于ax.legend(loc=9)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_33_01.png" src="../_images/index_33_01.png" />
+<img alt="../_images/index_33_0.png" src="../_images/index_33_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -877,7 +877,7 @@ ax.legend(loc='upper center') 等同于ax.legend(loc=9)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_37_01.png" src="../_images/index_37_01.png" />
+<img alt="../_images/index_37_0.png" src="../_images/index_37_0.png" />
 </div>
 </div>
 <p>​</p>
