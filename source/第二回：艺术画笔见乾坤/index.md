@@ -674,7 +674,7 @@ for label in ax1.xaxis.get_ticklabels():
 
 for line in ax1.yaxis.get_ticklines():
     # 调用y轴刻度线条实例, 是一个Line2D实例
-    line.set_color('green')    # 颜色
+    line.set_markeredgecolor('green')    # 颜色
     line.set_markersize(25)    # marker大小
     line.set_markeredgewidth(2)# marker粗细
 ```
