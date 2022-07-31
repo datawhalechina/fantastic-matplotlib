@@ -490,12 +490,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x0000017F69D2C0D0&gt;, &lt;matplotlib.lines.Line2D object at 0x0000017F69D2C460&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x0000020C25E80940&gt;, &lt;matplotlib.lines.Line2D object at 0x0000020C25E80CD0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/index_7_1.png" src="../_images/index_7_1.png" />
 </div>
 </div>
+<p>​</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Line2D对象绘制</span>
@@ -513,7 +514,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_8_01.png" src="../_images/index_8_01.png" />
+<img alt="../_images/index_9_01.png" src="../_images/index_9_01.png" />
 </div>
 </div>
 <p>​<br />
@@ -545,7 +546,7 @@ pyplot里有个专门绘制误差线的功能，通过<code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_10_01.png" src="../_images/index_10_01.png" />
+<img alt="../_images/index_11_01.png" src="../_images/index_11_01.png" />
 </div>
 </div>
 <p>​<br />
@@ -599,7 +600,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_12_0.png" src="../_images/index_12_0.png" />
+<img alt="../_images/index_13_01.png" src="../_images/index_13_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -632,7 +633,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_14_0.png" src="../_images/index_14_0.png" />
+<img alt="../_images/index_15_01.png" src="../_images/index_15_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -665,7 +666,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_16_0.png" src="../_images/index_16_0.png" />
+<img alt="../_images/index_17_01.png" src="../_images/index_17_01.png" />
 </div>
 </div>
 <p>​</p>
@@ -684,7 +685,7 @@ Rectangle本身的主要比较简单，即xy控制锚点，width和height分别�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_18_0.png" src="../_images/index_18_0.png" />
+<img alt="../_images/index_19_0.png" src="../_images/index_19_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -714,7 +715,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_20_0.png" src="../_images/index_20_0.png" />
+<img alt="../_images/index_21_0.png" src="../_images/index_21_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -722,11 +723,11 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 <div class="section" id="c-wedge">
 <h4>c. Wedge-契形<a class="headerlink" href="#c-wedge" title="永久链接至标题">¶</a></h4>
-<p>matplotlib.patches.Polygon类是多边形类。其基类是matplotlib.patches.Patch，它的构造函数：</p>
+<p>matplotlib.patches.Wedge类是楔型类。其基类是matplotlib.patches.Patch，它的构造函数：</p>
 <blockquote>
 <div><p>class matplotlib.patches.Wedge(center, r, theta1, theta2, width=None, **kwargs)</p>
 </div></blockquote>
-<p>一个Wedge-契形 是以坐标x,y为中心，半径为r，从θ1扫到θ2(单位是度)。<br />
+<p>一个Wedge-楔型 是以坐标x,y为中心，半径为r，从θ1扫到θ2(单位是度)。<br />
 如果宽度给定，则从内半径r -宽度到外半径r画出部分楔形。wedge中比较常见的是绘制饼状图。</p>
 <p>matplotlib.pyplot.pie语法：</p>
 <blockquote>
@@ -735,9 +736,9 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <p>制作数据x的饼图，每个楔子的面积用x/sum(x)表示。<br />
 其中最主要的参数是前4个：</p>
 <ul class="simple">
-<li><p><strong>x</strong>：契型的形状，一维数组。</p></li>
+<li><p><strong>x</strong>：楔型的形状，一维数组。</p></li>
 <li><p><strong>explode</strong>：如果不是等于None，则是一个len(x)数组，它指定用于偏移每个楔形块的半径的分数。</p></li>
-<li><p><strong>labels</strong>：用于指定每个契型块的标记，取值是列表或为None。</p></li>
+<li><p><strong>labels</strong>：用于指定每个楔型块的标记，取值是列表或为None。</p></li>
 <li><p><strong>colors</strong>：饼图循环使用的颜色序列。如果取值为None，将使用当前活动循环中的颜色。</p></li>
 <li><p><strong>startangle</strong>：饼状图开始的绘制的角度。</p></li>
 </ul>
@@ -754,7 +755,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_22_0.png" src="../_images/index_22_0.png" />
+<img alt="../_images/index_23_0.png" src="../_images/index_23_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -781,7 +782,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_24_0.png" src="../_images/index_24_0.png" />
+<img alt="../_images/index_25_0.png" src="../_images/index_25_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -813,7 +814,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_26_0.png" src="../_images/index_26_0.png" />
+<img alt="../_images/index_27_0.png" src="../_images/index_27_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -851,7 +852,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_28_0.png" src="../_images/index_28_0.png" />
+<img alt="../_images/index_29_0.png" src="../_images/index_29_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -881,9 +882,10 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 [&lt;AxesSubplot:&gt;, &lt;Axes:&gt;]
 </pre></div>
 </div>
-<img alt="../_images/index_30_1.png" src="../_images/index_30_1.png" />
+<img alt="../_images/index_31_1.png" src="../_images/index_31_1.png" />
 </div>
 </div>
+<p>​</p>
 <p>由于<code class="docutils literal notranslate"><span class="pre">Figure</span></code>维持了<code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">axes</span></code>，因此你不应该手动的从<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>列表中添加删除元素，而是要通过<code class="docutils literal notranslate"><span class="pre">Figure.add_subplot()</span></code>、<code class="docutils literal notranslate"><span class="pre">Figure.add_axes()</span></code>来添加元素，通过<code class="docutils literal notranslate"><span class="pre">Figure.delaxes()</span></code>来删除元素。但是你可以迭代或者访问<code class="docutils literal notranslate"><span class="pre">Figure.axes</span></code>中的<code class="docutils literal notranslate"><span class="pre">Axes</span></code>，然后修改这个<code class="docutils literal notranslate"><span class="pre">Axes</span></code>的属性。</p>
 <p>比如下面的遍历axes里的内容，并且添加网格线：</p>
 <div class="cell docutils container">
@@ -897,7 +899,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_32_0.png" src="../_images/index_32_0.png" />
+<img alt="../_images/index_33_0.png" src="../_images/index_33_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -925,7 +927,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_34_0.png" src="../_images/index_34_0.png" />
+<img alt="../_images/index_35_0.png" src="../_images/index_35_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -983,7 +985,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.2,  4.2])
 </pre></div>
 </div>
-<img alt="../_images/index_36_1.png" src="../_images/index_36_1.png" />
+<img alt="../_images/index_37_1.png" src="../_images/index_37_1.png" />
 </div>
 </div>
 <p>​</p>
@@ -1014,7 +1016,7 @@ closed为True则指定多边形将起点和终点重合从而显式关闭多边�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_38_0.png" src="../_images/index_38_0.png" />
+<img alt="../_images/index_39_0.png" src="../_images/index_39_0.png" />
 </div>
 </div>
 <p>​</p>
@@ -1048,7 +1050,7 @@ x轴分为上下两个，因此tick1对应下侧的轴；tick2对应上侧的轴
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/index_40_0.png" src="../_images/index_40_0.png" />
+<img alt="../_images/index_41_0.png" src="../_images/index_41_0.png" />
 </div>
 </div>
 <p>​</p>

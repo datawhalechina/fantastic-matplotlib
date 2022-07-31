@@ -161,7 +161,7 @@ print(ax.lines); # 通过直接使用辅助方法画线，打印ax.lines后可�
 
   
 
-    
+​    
 
 
 
@@ -385,11 +385,11 @@ plt.fill(x, y1, color = "g", alpha = 0.3);
 
 
 #### c. Wedge-契形
-matplotlib.patches.Polygon类是多边形类。其基类是matplotlib.patches.Patch，它的构造函数：
+matplotlib.patches.Wedge类是楔型类。其基类是matplotlib.patches.Patch，它的构造函数：
 
 >class matplotlib.patches.Wedge(center, r, theta1, theta2, width=None, **kwargs)  
 
-一个Wedge-契形 是以坐标x,y为中心，半径为r，从θ1扫到θ2(单位是度)。  
+一个Wedge-楔型 是以坐标x,y为中心，半径为r，从θ1扫到θ2(单位是度)。  
 如果宽度给定，则从内半径r -宽度到外半径r画出部分楔形。wedge中比较常见的是绘制饼状图。  
 
 
@@ -398,9 +398,9 @@ matplotlib.pyplot.pie语法：
 
 制作数据x的饼图，每个楔子的面积用x/sum(x)表示。    
 其中最主要的参数是前4个：  
-+ **x**：契型的形状，一维数组。
++ **x**：楔型的形状，一维数组。
 + **explode**：如果不是等于None，则是一个len(x)数组，它指定用于偏移每个楔形块的半径的分数。  
-+ **labels**：用于指定每个契型块的标记，取值是列表或为None。  
++ **labels**：用于指定每个楔型块的标记，取值是列表或为None。  
 + **colors**：饼图循环使用的颜色序列。如果取值为None，将使用当前活动循环中的颜色。  
 + **startangle**：饼状图开始的绘制的角度。   
 
@@ -535,7 +535,7 @@ print(fig.axes) # fig.axes 中包含了subplot和axes两个实例, 刚刚添加�
 
 
 
-    
+​    
 
 
 由于`Figure`维持了`current axes`，因此你不应该手动的从`Figure.axes`列表中添加删除元素，而是要通过`Figure.add_subplot()`、`Figure.add_axes()`来添加元素，通过`Figure.delaxes()`来删除元素。但是你可以迭代或者访问`Figure.axes`中的`Axes`，然后修改这个`Axes`的属性。   
